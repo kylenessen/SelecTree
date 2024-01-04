@@ -182,12 +182,13 @@ kable(df_display, caption = "Column Completeness by Percentage", col.names = c("
 ::: callout-tip
 ## Possible Directions
 
-1.  I could generate lists of species that have missing values for each column, and get your undergrad to help find the missing info
-2.  We could focus on finishing many of the near complete columns
-3.  Or rank these columns based on priority and make progress on underrepresented information
+1.  I could generate lists of species that have missing values for each column, and get your undergrad to help find the missing info.
+2.  We could focus on finishing many of the near complete columns.
+3.  Or rank these columns based on priority and make progress on underrepresented information.
 :::
 
 ## Extra Spaces in Names
+
 When we first looked at this dataset, I noticed there was some weird things happening with the names. Specifically, extra spaces were finding their way into the names. I've copied a list of names that have additional spaces, which I have confirmed carries through to the website. I'm sure it's a pretty easy fix on their end. These are all additional spaces between the genus and specific epithet.
 
 ```{r}
@@ -227,3 +228,8 @@ kable(names_matrix, caption = "Names with Spacing Issues", col.names = NULL)
 
 ```
 
+::: callout-tip
+## Possible Directions
+
+Send this list to web site maintainers to fix.
+:::
