@@ -42,17 +42,17 @@
     "text": "Missing Data\nI believe a complete table should have no empty cells. As it stands now, most of the columns are incomplete. I’ve generated a table below that shows what percentage of the cells have values for each column.\n\n\n\nColumn Completeness by Percentage\n\n\nColumn\n%\nColumn\n%\n\n\n\n\ndisplay\n100.0\nusda_zone\n92.4\n\n\ndisplayed_scientific_name\n100.0\ngrowth_rate_low\n92.3\n\n\nfamily\n100.0\nwidth_low\n92.2\n\n\nhi_native\n100.0\nbark_color\n91.2\n\n\npacific_island\n100.0\nbark_texture\n90.0\n\n\nschoolyard\n100.0\nflower_time\n88.6\n\n\ntree_id\n100.0\nroot_damage_potential\n87.6\n\n\nca_invasive\n99.9\nfruiting_time\n87.5\n\n\ncalifornia_native\n99.9\nsaltspray_tolerance\n81.3\n\n\ndisplayed_common_name\n99.9\nphotolocations\n81.2\n\n\nleaf_form\n99.9\nflower_showiness\n77.8\n\n\nnative_range\n99.9\nlitter_type\n77.1\n\n\nleaf_arrangement\n99.8\nlandscape_application\n76.1\n\n\nheight_high\n99.5\nbranch_strength_high\n72.1\n\n\nfoliage_type\n99.4\nbranch_strength_low\n72.1\n\n\nheight_low\n99.4\nhealth_hazard\n71.9\n\n\nwater_use\n99.0\nflower_color\n68.7\n\n\nmemo\n98.9\ndisease_susceptibility\n67.0\n\n\nexposure_high\n98.8\npest_susceptibility\n64.2\n\n\nexposure_low\n98.8\nattracts_wildlife\n60.3\n\n\ntree_shape\n98.3\nalternative_common_names\n52.1\n\n\nfoliage_fall_color\n98.0\nflower_type\n51.6\n\n\nplanting_area\n97.7\nsynonyms\n35.4\n\n\nfoliage_growth_color\n96.9\napp_grrating\n32.5\n\n\nsoil_texture\n96.5\napp_lcant\n32.5\n\n\nfruit_type\n96.4\nappraisal\n32.5\n\n\nsunset_zone\n96.3\ndisease_resistant\n31.2\n\n\ngeneric_1\n96.0\nlandscape_use\n29.6\n\n\nsoil_ph_high\n95.8\nfruit_value\n28.5\n\n\nsoil_ph_low\n95.8\ndeer_palatable\n26.8\n\n\nfragrance\n95.5\nsalinity_tolerance\n26.0\n\n\nleaflet_shape\n95.3\nbiogenic_emissions\n16.7\n\n\nwidth_high\n92.7\nethnobotanical_info\n10.7\n\n\nfruit_color\n92.5\ninvasive_text\n3.4\n\n\ngrowth_rate_high\n92.5\npest_resistant\n1.4\n\n\nfruit_size\n92.4\ngeneric_2\n0.3\n\n\n\n\n\n\n\n\n\n\n\nPossible Directions\n\n\n\n\nI could generate lists of species that have missing values for each column, and get your undergrad to help find the missing info\nWe could focus on finishing many of the near complete columns\nOr rank these columns based on priority and make progress on underrepresented information"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "SelecTree Data Analysis Documentation",
-    "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nGetting Started\n\n\nWeek 0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJan 3, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\nNo matching items"
-  },
-  {
     "objectID": "posts/week-0/index.html#extra-spaces-in-names",
     "href": "posts/week-0/index.html#extra-spaces-in-names",
     "title": "Getting Started",
     "section": "Extra Spaces in Names",
-    "text": "Extra Spaces in Names\nWhen we first looked at this dataset, I noticed there was some weird things happening with the names. Specifically, extra spaces were finding their way into the names. I’ve copied a list of names that have additional spaces, which I have confirmed carries through to the website. I’m sure it’s a pretty easy fix on their end. These are all additional spaces between the genus and specific epithet.\n\n\n\nNames with Spacing Issues\n\n\nAndira inermis\nFagraea fragrans\n\n\nAreca vestiaria\nFicus dammaropsis\n\n\nButea monosperma\nFicus pseudopalma\n\n\nCallistemon brachyandra\nMalosma laurina\n\n\nCornus nutallii\nPlerandra elegantissima\n\n\nElaeis guineensis\nVitex trifolia"
+    "text": "Extra Spaces in Names\nWhen we first looked at this dataset, I noticed there was some weird things happening with the names. Specifically, extra spaces were finding their way into the names. I’ve copied a list of names that have additional spaces, which I have confirmed carries through to the website. I’m sure it’s a pretty easy fix on their end. These are all additional spaces between the genus and specific epithet.\n\n\n\nNames with Spacing Issues\n\n\nAndira inermis\nFagraea fragrans\n\n\nAreca vestiaria\nFicus dammaropsis\n\n\nButea monosperma\nFicus pseudopalma\n\n\nCallistemon brachyandra\nMalosma laurina\n\n\nCornus nutallii\nPlerandra elegantissima\n\n\nElaeis guineensis\nVitex trifolia\n\n\n\n\n\n\n\n\n\n\n\nPossible Directions\n\n\n\nSend this list to web site maintainers to fix."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "SelecTree Data Analysis Documentation",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n  \n\n\n\n\nGetting Started\n\n\nWeek 0\n\n\n\n\n\n\n\n\n\nJan 3, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\nNo matching items"
   }
 ]
