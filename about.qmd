@@ -1,0 +1,15 @@
+---
+title: "About"
+about:
+  template: jolla
+---
+
+This site is dedicated to sharing and documenting the work done between Matt Ritter and Kyle Nessen to improve the data quality at SelecTree.
+
+<a href="https://selectree.calpoly.edu/">
+  <img src="images/clipboard-2575345176.png" alt="Selectree Link" width="400">
+</a>
+
+
+
+

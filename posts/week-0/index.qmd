@@ -1,0 +1,229 @@
+---
+title: "Getting Started"
+subtitle: "Week 0"
+author: "Kyle Nessen"
+date: "2024-01-03"
+toc: true
+categories: []
+format: 
+   html:
+     df-print: kable
+execute:
+  echo: false
+---
+
+## Purpose
+
+Matt and I met today to discuss how I can contribute to improving the [SelecTree](https://selectree.calpoly.edu/) database. What was asked of me was to explore the dataset as it stands now, find areas where we can spend useful effort, and report back with a short document. This web page serves as that report.
+
+```{r include=FALSE}
+setwd("~/Documents/Code/SelecTree/posts/Week-0")
+library(readr)
+library(dplyr)
+library(knitr)
+library(stringr)
+```
+
+## Import Issues
+
+Initially, I had some confusing results when trying to naively import the csv to R. The read_csv function tries to guess the data type for each column, and it did so poorly for many of them. Normally I won't show code, but I'm including a block here for future reference as I manually reviewed each column to get it to load correctly. This should hopefully save time in the future for anyone trying to recreate the import.
+
+```{r echo=TRUE}
+df <- treedata_20240103 <- read_csv("treedata_20240103.csv", 
+    col_types = cols(generic_2 = col_character(), 
+        pacific_island = col_logical(), display = col_logical(), 
+        california_native = col_logical(), 
+        ca_invasive = col_logical(), hi_native = col_logical(), 
+        invasive_text = col_character(), 
+        foliage_fall_color = col_logical(), 
+        fragrance = col_logical(), usda_zone = col_character(), 
+        pest_resistant = col_character(), 
+        deer_palatable = col_character(), 
+        schoolyard = col_logical()), show_col_types = FALSE)
+```
+
+## Master Database Elsewhere?
+
+The import issues and scrolling through the data makes me suspicious that this csv is a "shadow" of some more robust database stored elsewhere. Many of the columns, which I'll explore below, appear to extract values from database tables and transform them to fit into a typical spreadsheet.
+
+As an example, let's look at sunset zones.
+
+```{r}
+head(df %>% select(displayed_scientific_name, sunset_zone))
+```
+
+While these sunset zones are orderly and structured, having them listed as values separated by commas is difficult to use in any practical computer setting. For example, how would you find all trees that occur in sunset zone 5? You can't simply search for "5" in the column, as zone 15 exists.
+
+A more practical way to address this type of information is to make a table entirely dedicated to sunset zones, where each zone gets a unique column. The value for each that column is simply `true` or `false`, accompanied by the species name or tree ID:
+
+```{r}
+data <- data.frame(
+  displayed_scientific_name = c("Abies amabilis", "Abies bracteata", "Abies concolor", "Abies concolor 'Violacea'", "Abies firma", "Abies grandis"),
+  zone_1 = c(FALSE, FALSE, TRUE, TRUE, TRUE, TRUE),
+  zone_2 = c(FALSE, FALSE, TRUE, TRUE, TRUE, TRUE),
+  zone_3 = c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE),
+  zone_4 = c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE),
+  zone_5 = c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE),
+  zone_6 = c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE),
+  zone_7 = c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE),
+  zone_8 = c(FALSE, TRUE, TRUE, TRUE, TRUE, TRUE),
+  zone_9 = c(FALSE, TRUE, TRUE, TRUE, TRUE, TRUE),
+  zone_10 = c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE),
+  zone_11 = c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE),
+  zone_12 = c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE),
+  zone_13 = c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE),
+  zone_14 = c(FALSE, TRUE, TRUE, TRUE, TRUE, TRUE),
+  zone_15 = c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE),
+  zone_16 = c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE),
+  zone_17 = c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE),
+  zone_18 = c(FALSE, TRUE, TRUE, TRUE, FALSE, FALSE),
+  zone_19 = c(FALSE, TRUE, TRUE, TRUE, FALSE, FALSE),
+  zone_20 = c(FALSE, TRUE, TRUE, TRUE, FALSE, FALSE),
+  zone_21 = c(FALSE, TRUE, TRUE, TRUE, FALSE, FALSE),
+  zone_22 = c(FALSE, FALSE, TRUE, TRUE, FALSE, FALSE),
+  zone_23 = c(FALSE, FALSE, TRUE, TRUE, FALSE, FALSE),
+  zone_24 = c(FALSE, FALSE, TRUE, TRUE, FALSE, FALSE)
+)
+
+data
+
+```
+
+This way you can simply filter by the zone you're interested in. In excel, you would simply filter out all `false` values in the `zone_5` column.
+
+I strongly suspect a table like this exists somewhere, and someone wrote a bit of code to condense into the comma separated list you see in the export. And if that is not the case, it really should be.
+
+::: callout-tip
+## Possible Directions
+
+1.  I could work on updating this fully expanded table for all species by scraping some online data source. At the very least, I can search for species that do not have this information.
+
+2.  We could meet with the data people to see if they have a table like this already, and if not, we could work with them to create one. Alternatively, I can make a tool for you to expand this table as needed.
+:::
+
+Many other columns fall into this table-compressed-to-a-column category. Essentially any column that contains (or can contain) multiple pieces of information within the same cell. Below I list the columns that I found which I believe should be expanded to separate tables:
+
+```{r}
+column_names <- c("photolocations", "landscape_application", "landscape_use", 
+                  "native_range","tree_shape", "litter_type", "bark_color", "bark_texture", 
+                  "foliage_growth_color", "foliage_fall_color",
+                  "fruit_value", "fruiting_time", 
+                  "flower_color", "flower_time", "usda_zone", 
+                  "sunset_zone", "soil_texture", 
+                  "pest_resistant", "pest_susceptibility", "disease_resistant", 
+                  "disease_susceptibility", "health_hazard", 
+                  "attracts_wildlife")
+
+sorted_column_names <- sort(column_names)
+
+column_length <- ceiling(length(sorted_column_names) / 3)
+
+first_third <- sorted_column_names[1:column_length]
+second_third <- sorted_column_names[(column_length + 1):(2 * column_length)]
+third_third <- c(sorted_column_names[(2 * column_length + 1):length(sorted_column_names)], rep("", (3 * column_length) - length(sorted_column_names)))
+
+df_columns <- data.frame(first_third, second_third, third_third)
+
+kable(df_columns, caption = "Expandable Columns", col.names = NULL)
+```
+
+::: callout-tip
+## Possible Directions
+
+Each column presents a new effort for documenting tree characteristics. We could explore which columns are highest priority.
+:::
+
+## Missing Data
+
+I believe a complete table should have no empty cells. As it stands now, most of the columns are incomplete. I've generated a table below that shows what percentage of the cells have values for each column.
+
+```{r}
+
+# Sample dataframe
+# df <- data.frame(...)
+
+# Calculate the percentage of non-NA values
+non_na_percentage <- round((colSums(!is.na(df)) / nrow(df)) * 100, 1)
+
+# Create a dataframe with column names and non-NA percentages
+result_df <- data.frame(
+  Column = names(df),
+  NonNA_Percentage = non_na_percentage
+)
+
+# Sort the dataframe by NonNA_Percentage in descending order, then by Column alphabetically
+result_df <- result_df[order(-result_df$NonNA_Percentage, result_df$Column), ]
+
+# Drop the row names
+rownames(result_df) <- NULL
+
+# Divide the dataframe into two halves for two columns
+half <- ceiling(nrow(result_df) / 2)
+
+# Create two halves
+first_half <- result_df[1:half, ]
+second_half <- result_df[(half + 1):nrow(result_df), ]
+
+# If the second half is shorter, add empty rows to make the dataframes of equal length
+if (nrow(first_half) > nrow(second_half)) {
+  second_half <- rbind(second_half, 
+                       data.frame(Column = rep("", nrow(first_half) - nrow(second_half)), 
+                                  NonNA_Percentage = rep(NA, nrow(first_half) - nrow(second_half))))
+}
+
+# Combine the two halves into a new dataframe for display
+df_display <- data.frame(first_half, second_half)
+
+# Use kable to create a nice table
+kable(df_display, caption = "Column Completeness by Percentage", col.names = c("Column", "%", "Column", "%"))
+
+```
+
+::: callout-tip
+## Possible Directions
+
+1.  I could generate lists of species that have missing values for each column, and get your undergrad to help find the missing info
+2.  We could focus on finishing many of the near complete columns
+3.  Or rank these columns based on priority and make progress on underrepresented information
+:::
+
+## Extra Spaces in Names
+When we first looked at this dataset, I noticed there was some weird things happening with the names. Specifically, extra spaces were finding their way into the names. I've copied a list of names that have additional spaces, which I have confirmed carries through to the website. I'm sure it's a pretty easy fix on their end. These are all additional spaces between the genus and specific epithet.
+
+```{r}
+# Adjusted for the correct column name 'displayed_scientific_name'
+
+# Identify names with multiple spaces (two or more)
+has_multiple_spaces <- str_detect(df$displayed_scientific_name, "\\s{2,}")
+
+# Identify names with leading or trailing spaces
+has_leading_or_trailing_spaces <- df$displayed_scientific_name != str_trim(df$displayed_scientific_name)
+
+# Combine the two issues
+has_spacing_issues <- has_multiple_spaces | has_leading_or_trailing_spaces
+
+df_issues <- df[has_spacing_issues, ]
+
+# Sort the names alphabetically
+sorted_names <- sort(df_issues$displayed_scientific_name)
+
+# Determine the midpoint
+midpoint <- ceiling(length(sorted_names) / 2)
+
+# Split the sorted names into two columns
+names_column_1 <- sorted_names[1:midpoint]
+names_column_2 <- sorted_names[(midpoint + 1):length(sorted_names)]
+
+# If the second column is shorter, pad it with NA to match the length of the first column
+if (length(names_column_1) > length(names_column_2)) {
+  names_column_2 <- c(names_column_2, rep(NA, length(names_column_1) - length(names_column_2)))
+}
+
+# Combine into a matrix for display
+names_matrix <- cbind(names_column_1, names_column_2)
+
+# Display the table of names with issues using kable
+kable(names_matrix, caption = "Names with Spacing Issues", col.names = NULL)
+
+```
+

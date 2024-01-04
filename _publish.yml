@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: bfb31dce-787c-4926-9cf4-dd7acee5739e
+      url: 'https://kylenessen.quarto.pub/selectree'

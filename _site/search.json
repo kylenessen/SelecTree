@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This site is dedicated to sharing and documenting the work done between Matt Ritter and Kyle Nessen to improve the data quality at SelecTree."
+  },
+  {
+    "objectID": "posts/week-0/index.html",
+    "href": "posts/week-0/index.html",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Matt and I met today to discuss how I can contribute to improving the SelecTree database. What was asked of me was to explore the dataset as it stands now, find areas where we can spend useful effort, and report back with a short document. This web page serves as that report."
+  },
+  {
+    "objectID": "posts/week-0/index.html#purpose",
+    "href": "posts/week-0/index.html#purpose",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Matt and I met today to discuss how I can contribute to improving the SelecTree database. What was asked of me was to explore the dataset as it stands now, find areas where we can spend useful effort, and report back with a short document. This web page serves as that report."
+  },
+  {
+    "objectID": "posts/week-0/index.html#import-issues",
+    "href": "posts/week-0/index.html#import-issues",
+    "title": "Getting Started",
+    "section": "Import Issues",
+    "text": "Import Issues\nInitially, I had some confusing results when trying to naively import the csv to R. The read_csv function tries to guess the data type for each column, and it did so poorly for many of them. Normally I won’t show code, but I’m including a block here for future reference as I manually reviewed each column to get it to load correctly. This should hopefully save time in the future for anyone trying to recreate the import.\n\ndf &lt;- treedata_20240103 &lt;- read_csv(\"treedata_20240103.csv\", \n    col_types = cols(generic_2 = col_character(), \n        pacific_island = col_logical(), display = col_logical(), \n        california_native = col_logical(), \n        ca_invasive = col_logical(), hi_native = col_logical(), \n        invasive_text = col_character(), \n        foliage_fall_color = col_logical(), \n        fragrance = col_logical(), usda_zone = col_character(), \n        pest_resistant = col_character(), \n        deer_palatable = col_character(), \n        schoolyard = col_logical()), show_col_types = FALSE)"
+  },
+  {
+    "objectID": "posts/week-0/index.html#master-database-elsewhere",
+    "href": "posts/week-0/index.html#master-database-elsewhere",
+    "title": "Getting Started",
+    "section": "Master Database Elsewhere?",
+    "text": "Master Database Elsewhere?\nThe import issues and scrolling through the data makes me suspicious that this csv is a “shadow” of some more robust database stored elsewhere. Many of the columns, which I’ll explore below, appear to extract values from database tables and transform them to fit into a typical spreadsheet.\nAs an example, let’s look at sunset zones.\n\n\n\n\n\n\n\n\n\n\ndisplayed_scientific_name\nsunset_zone\n\n\n\n\nAbies amabilis\n3,4,5,6,7,15,16,17\n\n\nAbies bracteata\n6,7,8,9,14,15,16,17,18,19,20,21\n\n\nAbies concolor\n1,2,3,4,5,6,7,8,9,14,15,16,17,18,19,20,21,22,23,24\n\n\nAbies concolor ‘Violacea’\n1,2,3,4,5,6,7,8,9,14,15,16,17,18,19,20,21,22,23,24\n\n\nAbies firma\n1,2,3,4,5,6,7,8,9,14,15,16,17\n\n\nAbies grandis\n1,2,3,4,5,6,7,8,9,14,15,16,17\n\n\n\n\n\n\nWhile these sunset zones are orderly and structured, having them listed as values separated by commas is difficult to use in any practical computer setting. For example, how would you find all trees that occur in sunset zone 5? You can’t simply search for “5” in the column, as zone 15 exists.\nA more practical way to address this type of information is to make a table entirely dedicated to sunset zones, where each zone gets a unique column. The value for each that column is simply true or false, accompanied by the species name or tree ID:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndisplayed_scientific_name\nzone_1\nzone_2\nzone_3\nzone_4\nzone_5\nzone_6\nzone_7\nzone_8\nzone_9\nzone_10\nzone_11\nzone_12\nzone_13\nzone_14\nzone_15\nzone_16\nzone_17\nzone_18\nzone_19\nzone_20\nzone_21\nzone_22\nzone_23\nzone_24\n\n\n\n\nAbies amabilis\nFALSE\nFALSE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\nTRUE\nTRUE\nTRUE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\n\n\nAbies bracteata\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\nTRUE\nTRUE\nTRUE\nTRUE\nFALSE\nFALSE\nFALSE\nFALSE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nFALSE\nFALSE\nFALSE\n\n\nAbies concolor\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nFALSE\nFALSE\nFALSE\nFALSE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\n\n\nAbies concolor ‘Violacea’\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nFALSE\nFALSE\nFALSE\nFALSE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\n\n\nAbies firma\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nFALSE\nFALSE\nFALSE\nFALSE\nTRUE\nTRUE\nTRUE\nTRUE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\n\n\nAbies grandis\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nTRUE\nFALSE\nFALSE\nFALSE\nFALSE\nTRUE\nTRUE\nTRUE\nTRUE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\nFALSE\n\n\n\n\n\n\nThis way you can simply filter by the zone you’re interested in. In excel, you would simply filter out all false values in the zone_5 column.\nI strongly suspect a table like this exists somewhere, and someone wrote a bit of code to condense into the comma separated list you see in the export. And if that is not the case, it really should be.\n\n\n\n\n\n\nPossible Directions\n\n\n\n\nI could work on updating this fully expanded table for all species by scraping some online data source. At the very least, I can search for species that do not have this information.\nWe could meet with the data people to see if they have a table like this already, and if not, we could work with them to create one. Alternatively, I can make a tool for you to expand this table as needed.\n\n\n\nMany other columns fall into this table-compressed-to-a-column category. Essentially any column that contains (or can contain) multiple pieces of information within the same cell. Below I list the columns that I found which I believe should be expanded to separate tables:\n\n\n\nExpandable Columns\n\n\nattracts_wildlife\nfoliage_growth_color\npest_resistant\n\n\nbark_color\nfruit_value\npest_susceptibility\n\n\nbark_texture\nfruiting_time\nphotolocations\n\n\ndisease_resistant\nhealth_hazard\nsoil_texture\n\n\ndisease_susceptibility\nlandscape_application\nsunset_zone\n\n\nflower_color\nlandscape_use\ntree_shape\n\n\nflower_time\nlitter_type\nusda_zone\n\n\nfoliage_fall_color\nnative_range\n\n\n\n\n\n\n\n\n\n\n\n\nPossible Directions\n\n\n\nEach column presents a new effort for documenting tree characteristics. We could explore which columns are highest priority."
+  },
+  {
+    "objectID": "posts/week-0/index.html#missing-data",
+    "href": "posts/week-0/index.html#missing-data",
+    "title": "Getting Started",
+    "section": "Missing Data",
+    "text": "Missing Data\nI believe a complete table should have no empty cells. As it stands now, most of the columns are incomplete. I’ve generated a table below that shows what percentage of the cells have values for each column.\n\n\n\nColumn Completeness by Percentage\n\n\nColumn\n%\nColumn\n%\n\n\n\n\ndisplay\n100.0\nusda_zone\n92.4\n\n\ndisplayed_scientific_name\n100.0\ngrowth_rate_low\n92.3\n\n\nfamily\n100.0\nwidth_low\n92.2\n\n\nhi_native\n100.0\nbark_color\n91.2\n\n\npacific_island\n100.0\nbark_texture\n90.0\n\n\nschoolyard\n100.0\nflower_time\n88.6\n\n\ntree_id\n100.0\nroot_damage_potential\n87.6\n\n\nca_invasive\n99.9\nfruiting_time\n87.5\n\n\ncalifornia_native\n99.9\nsaltspray_tolerance\n81.3\n\n\ndisplayed_common_name\n99.9\nphotolocations\n81.2\n\n\nleaf_form\n99.9\nflower_showiness\n77.8\n\n\nnative_range\n99.9\nlitter_type\n77.1\n\n\nleaf_arrangement\n99.8\nlandscape_application\n76.1\n\n\nheight_high\n99.5\nbranch_strength_high\n72.1\n\n\nfoliage_type\n99.4\nbranch_strength_low\n72.1\n\n\nheight_low\n99.4\nhealth_hazard\n71.9\n\n\nwater_use\n99.0\nflower_color\n68.7\n\n\nmemo\n98.9\ndisease_susceptibility\n67.0\n\n\nexposure_high\n98.8\npest_susceptibility\n64.2\n\n\nexposure_low\n98.8\nattracts_wildlife\n60.3\n\n\ntree_shape\n98.3\nalternative_common_names\n52.1\n\n\nfoliage_fall_color\n98.0\nflower_type\n51.6\n\n\nplanting_area\n97.7\nsynonyms\n35.4\n\n\nfoliage_growth_color\n96.9\napp_grrating\n32.5\n\n\nsoil_texture\n96.5\napp_lcant\n32.5\n\n\nfruit_type\n96.4\nappraisal\n32.5\n\n\nsunset_zone\n96.3\ndisease_resistant\n31.2\n\n\ngeneric_1\n96.0\nlandscape_use\n29.6\n\n\nsoil_ph_high\n95.8\nfruit_value\n28.5\n\n\nsoil_ph_low\n95.8\ndeer_palatable\n26.8\n\n\nfragrance\n95.5\nsalinity_tolerance\n26.0\n\n\nleaflet_shape\n95.3\nbiogenic_emissions\n16.7\n\n\nwidth_high\n92.7\nethnobotanical_info\n10.7\n\n\nfruit_color\n92.5\ninvasive_text\n3.4\n\n\ngrowth_rate_high\n92.5\npest_resistant\n1.4\n\n\nfruit_size\n92.4\ngeneric_2\n0.3\n\n\n\n\n\n\n\n\n\n\n\nPossible Directions\n\n\n\n\nI could generate lists of species that have missing values for each column, and get your undergrad to help find the missing info\nWe could focus on finishing many of the near complete columns\nOr rank these columns based on priority and make progress on underrepresented information"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "SelecTree Data Analysis Documentation",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nGetting Started\n\n\nWeek 0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJan 3, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/week-0/index.html#extra-spaces-in-names",
+    "href": "posts/week-0/index.html#extra-spaces-in-names",
+    "title": "Getting Started",
+    "section": "Extra Spaces in Names",
+    "text": "Extra Spaces in Names\nWhen we first looked at this dataset, I noticed there was some weird things happening with the names. Specifically, extra spaces were finding their way into the names. I’ve copied a list of names that have additional spaces, which I have confirmed carries through to the website. I’m sure it’s a pretty easy fix on their end. These are all additional spaces between the genus and specific epithet.\n\n\n\nNames with Spacing Issues\n\n\nAndira inermis\nFagraea fragrans\n\n\nAreca vestiaria\nFicus dammaropsis\n\n\nButea monosperma\nFicus pseudopalma\n\n\nCallistemon brachyandra\nMalosma laurina\n\n\nCornus nutallii\nPlerandra elegantissima\n\n\nElaeis guineensis\nVitex trifolia"
+  }
+]
