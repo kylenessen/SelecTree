@@ -7,6 +7,34 @@
     "text": "This site is dedicated to sharing and documenting the work done between Matt Ritter and Kyle Nessen to improve the data quality at SelecTree."
   },
   {
+    "objectID": "posts/week-1/index.html",
+    "href": "posts/week-1/index.html",
+    "title": "Sunset Climate Zones and Taxonomy",
+    "section": "",
+    "text": "Matt and May like the blog format. Agreed a new post each week to document work done is a nice path forward.\nI created an account with SelecTree. May working on getting me admin access.\nSunset Zones were identified as a priority. I offered to look into scraping the data form some online source.\nMatt wants me to run all selecTree names through some taxonomic name parser, such as the Taxonomic Name Resolution Service or the GBIF Name Parser.\nI offered to export subsets of the dataset that can be handed off to undergrads to help fill out."
+  },
+  {
+    "objectID": "posts/week-1/index.html#previous-week-meeting-notes",
+    "href": "posts/week-1/index.html#previous-week-meeting-notes",
+    "title": "Sunset Climate Zones and Taxonomy",
+    "section": "",
+    "text": "Matt and May like the blog format. Agreed a new post each week to document work done is a nice path forward.\nI created an account with SelecTree. May working on getting me admin access.\nSunset Zones were identified as a priority. I offered to look into scraping the data form some online source.\nMatt wants me to run all selecTree names through some taxonomic name parser, such as the Taxonomic Name Resolution Service or the GBIF Name Parser.\nI offered to export subsets of the dataset that can be handed off to undergrads to help fill out."
+  },
+  {
+    "objectID": "posts/week-1/index.html#sunset-climate-zones",
+    "href": "posts/week-1/index.html#sunset-climate-zones",
+    "title": "Sunset Climate Zones and Taxonomy",
+    "section": "Sunset climate zones",
+    "text": "Sunset climate zones\nWhen I offered to scrape the Sunset Climate Zones, I didn’t realize that the information was only in The New Western Garden Book. That obviously complicates my scraping plans, but I have a few ideas.\n\nManually enter missing zones\nThis is the most direct way to get to the primary source for our missing trees. Fortunately, there are only 71 missing species, so I think this is the way to go. Below I list the first ten species with missing Sunset Zones as an example. I’ve also included a link to the SelecTree page.\n\n\n\nSpecies with Missing Sunset Zones (first 10)\n\n\nTree ID\nScientific Name\nSelecTree URL\n\n\n\n\n1829\nAextoxicon punctatum\nhttps://selectree.calpoly.edu/tree-detail/1829\n\n\n1831\nAristotelia chilensis\nhttps://selectree.calpoly.edu/tree-detail/1831\n\n\n1832\nAustrocedrus chilensis\nhttps://selectree.calpoly.edu/tree-detail/1832\n\n\n1860\nBeilschmiedia berteroana\nhttps://selectree.calpoly.edu/tree-detail/1860\n\n\n1833\nBeilschmiedia miersii\nhttps://selectree.calpoly.edu/tree-detail/1833\n\n\n1984\nBeilschmiedia tarairi\nhttps://selectree.calpoly.edu/tree-detail/1984\n\n\n1986\nCeratopetalum gummiferum\nhttps://selectree.calpoly.edu/tree-detail/1986\n\n\n1989\nDacrycarpus dacrydioides\nhttps://selectree.calpoly.edu/tree-detail/1989\n\n\n1990\nDacrydium cupressinum\nhttps://selectree.calpoly.edu/tree-detail/1990\n\n\n1836\nDasyphyllum diacanthoides\nhttps://selectree.calpoly.edu/tree-detail/1836\n\n\n\n\n\n\n\n\nGoogle Sheets link\nI’ve prepared a Google Sheet to help with data entry. It contains all the species with missing sunset zones, as well as a column for each zone. It should be fairly straightforward to enter the information, simply check the box for each applicable zone. The “completed” column is there to indicate of that species is done.\n\n    SelecTree - Missing Sunset Climate Zones\n\n\n\n\nScrape other sites\nIf, for some reason, we want to rebuild the Sunset Zone information for this database, there are a number of sites that contain the information. We would likely need to piece together several sites to cover the whole SelecTree dataset. I’ve listed a few below.\n\nhttps://www.gardenia.net/\nhttps://calscape.org/\nhttps://pfaf.org/\nhttps://davesgarden.com/\n\nPlease note, however, that each site would represent its own coding endeavor, multiplying the work for each site added. I don’t think we should go down this path unless it’s warranted, but I wanted to make the option explicit here.\n\n\nReinvent a better wheel\nLooking into the Sunset Climate Zones has me wondering, “can we do this better?”\nFrom my understanding, the Sunset Zones take climatic characteristics relevant to plants, group them into a finite number of zones, and map them across the Western US.\nIt seems unlikely that Editors of Western Garden Book had access to millions of tree points and modern weather data when they wrote the original edition. No doubt, the book is a major accomplishment, but I wonder what could be done with a data driven approach with the information at our disposal.\nThis “better climate zones” project would no doubt take a lot of effort (maybe a master’s?), so I’m not suggesting we do this now. You have also probably already explored this idea and may be working on it now or there’s some complication I’m not aware of. Still, I think it’s worth bringing up, as such a product would make SelecTree stand out even more than it does now. We might be the only ones in the world right now who have the data to make it happen. For what it’s worth!"
+  },
+  {
+    "objectID": "posts/week-1/index.html#taxonomy",
+    "href": "posts/week-1/index.html#taxonomy",
+    "title": "Sunset Climate Zones and Taxonomy",
+    "section": "Taxonomy",
+    "text": "Taxonomy\nFor the rest of the week, I plan to really get into the taxonomy of the tree species. I want to build out a robust table that we all feel confident about. I will update this section as I make progress."
+  },
+  {
     "objectID": "posts/week-0/index.html",
     "href": "posts/week-0/index.html",
     "title": "Getting Started",
@@ -53,6 +81,6 @@
     "href": "index.html",
     "title": "SelecTree Data Analysis Documentation",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n  \n\n\n\n\nGetting Started\n\n\nWeek 0\n\n\n\n\n\n\n\n\n\nJan 3, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n  \n\n\n\n\nSunset Climate Zones and Taxonomy\n\n\nWeek 1\n\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n  \n\n\n\n\nGetting Started\n\n\nWeek 0\n\n\n\n\n\n\n\n\n\nJan 3, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\nNo matching items"
   }
 ]
