@@ -29,7 +29,8 @@ library(stringr)
 Initially, I had some confusing results when trying to naively import the csv to R. The read_csv function tries to guess the data type for each column, and it did so poorly for many of them. Normally I won't show code, but I'm including a block here for future reference as I manually reviewed each column to get it to load correctly. This should hopefully save time in the future for anyone trying to recreate the import.
 
 ```{r echo=TRUE}
-df <- treedata_20240103 <- read_csv("treedata_20240103.csv", 
+library(readr)
+df <- read_csv("treedata_20240103.csv", 
     col_types = cols(generic_2 = col_character(), 
         pacific_island = col_logical(), display = col_logical(), 
         california_native = col_logical(), 
