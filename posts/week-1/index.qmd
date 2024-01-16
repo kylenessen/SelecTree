@@ -1,0 +1,143 @@
+---
+title: "Sunset Climate Zones and Taxonomy"
+subtitle: "Week 1"
+author: "Kyle Nessen"
+date: "2024-01-11"
+toc: true
+categories: []
+format: 
+   html:
+     df-print: kable
+execute:
+  echo: false
+---
+
+```{r include=FALSE}
+library(readr)
+library(dplyr)
+library(knitr)
+library(stringr)
+library(kableExtra)
+setwd("~/Documents/Code/SelecTree/posts/week-1")
+
+df <- read_csv("~/Documents/Code/SelecTree/posts/Week-0/treedata_20240103.csv", 
+    col_types = cols(generic_2 = col_character(), 
+        pacific_island = col_logical(), display = col_logical(), 
+        california_native = col_logical(), 
+        ca_invasive = col_logical(), hi_native = col_logical(), 
+        invasive_text = col_character(), 
+        foliage_fall_color = col_logical(), 
+        fragrance = col_logical(), usda_zone = col_character(), 
+        pest_resistant = col_character(), 
+        deer_palatable = col_character(), 
+        schoolyard = col_logical()), show_col_types = FALSE)
+```
+
+## Previous week meeting notes
+
+-   Matt and May like the blog format. Agreed a new post each week to document work done is a nice path forward.
+-   I created an account with SelecTree. May working on getting me admin access.
+-   Sunset Zones were identified as a priority. I offered to look into scraping the data form some online source.
+-   Matt wants me to run all selecTree names through some taxonomic name parser, such as the [Taxonomic Name Resolution Service](https://tnrs.biendata.org/) or the [GBIF Name Parser](https://www.gbif.org/tools/name-parser).
+-   I offered to export subsets of the dataset that can be handed off to undergrads to help fill out.
+
+## Sunset climate zones
+
+When I offered to scrape the Sunset Climate Zones, I didn't realize that the information was *only* in The New Western Garden Book. That obviously complicates my scraping plans, but I have a few ideas.
+
+### Manually enter missing zones
+
+This is the most direct way to get to the primary source for our missing trees. Fortunately, there are only `71` missing species, so I think this is the way to go. Below I list the first ten species with missing Sunset Zones as an example. I've also included a link to the SelecTree page.
+
+```{r}
+# Assuming df is your dataframe and sunset_zone is the column of interest
+filtered_df <- df |> 
+  filter(is.na(sunset_zone) | sunset_zone == "")
+
+# Sort the dataframe by the scientific name
+filtered_df <- filtered_df[order(filtered_df$displayed_scientific_name),]
+
+# Generate selectree url
+
+filtered_df <- mutate(filtered_df, selectree_url = paste0("https://selectree.calpoly.edu/tree-detail/",tree_id))
+
+filtered_df <- filtered_df |> select(c(tree_id,displayed_scientific_name,selectree_url)) |> head(10)
+
+# Modify the URLs to be clickable hyperlinks
+filtered_df <- mutate(filtered_df, selectree_url = paste0('<a href="', selectree_url, '">', selectree_url, '</a>'))
+
+# Use kable to create a table with clickable links
+kable(filtered_df, col.names = c("Tree ID", "Scientific Name", "SelecTree URL"), 
+      format = "html", escape = FALSE, 
+      caption = "Species with Missing Sunset Zones (first 10)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+```{r}
+sz_export <- df |> 
+  filter(is.na(sunset_zone) | sunset_zone == "") |>
+  select(c(tree_id,displayed_scientific_name))
+
+sz_export <- sz_export[order(sz_export$displayed_scientific_name),]
+
+# Create zone 1 - 24 columns, default to FALSE
+
+# Create the column names
+zone_cols <- paste("zone", 1:24, sep = "_")
+
+# Use mutate to add each new column
+sz_export <- mutate(sz_export, !!!setNames(lapply(zone_cols, function(x) FALSE), zone_cols))
+
+
+sz_export_path = "selectree_missing_sunset_zones_20230111.csv"
+
+write_csv(sz_export,sz_export_path,na="")
+
+```
+
+#### Google Sheets
+
+I've prepared a Google Sheet to help with data entry. It contains all the species with missing sunset zones, as well as a column for each zone. It should be fairly straightforward to enter the information, simply check the box for each applicable zone. The "completed" column is there to indicate of that species is done.
+
+```{=html}
+<div style="text-align: center;">
+    <a href="https://docs.google.com/spreadsheets/d/1UbOgSVUpEaFNp5VYTVouyZxMEbmX1AzWX788KbxMfuQ/edit?usp=sharing" target="_blank" style="background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 20px 40px; /* Size of the button */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px; /* Font size */
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;">SelecTree - Missing Sunset Climate Zones</a>
+</div>
+```
+### Scrape other sites
+
+If, for some reason, we want to rebuild the Sunset Zone information for this database, there are a number of sites that contain the information. We would likely need to piece together several sites to cover the whole SelecTree dataset. I've listed a few below.
+
+-   <https://www.gardenia.net/>
+
+-   <https://calscape.org/>
+
+-   <https://pfaf.org/>
+
+-   <https://davesgarden.com/>
+
+Please note, however, that each site would represent its own coding endeavor, multiplying the work for each site added. I don't think we should go down this path unless it's warranted, but I wanted to make the option explicit here.
+
+### Reinvent a better wheel
+
+Looking into the Sunset Climate Zones has me wondering, "can we do this better?"
+
+From my understanding, the Sunset Zones take climatic characteristics relevant to plants, group them into a finite number of zones, and map them across the Western US.
+
+It seems unlikely that Editors of Western Garden Book had access to *millions* of tree points and modern weather data when they wrote the original edition. No doubt, the book is a major accomplishment, but I wonder what could be done with a data driven approach with the information at our disposal.
+
+This "better climate zones" project would no doubt take a lot of effort (maybe a master's?), so I'm not suggesting we do this now. You have also probably already explored this idea and may be working on it now or there's some complication I'm not aware of. Still, I think it's worth bringing up, as such a product would make SelecTree stand out even more than it does now. We might be the only ones in the world right now who have the data to make it happen. For what it's worth!
+
+## Taxonomy
+
+For the rest of the week, I plan to really get into the taxonomy of the tree species. I want to build out a robust table that we all feel confident about. I will update this section as I make progress.
