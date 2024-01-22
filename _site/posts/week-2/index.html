@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Kyle Nessen">
+<meta name="dcterms.date" content="2024-01-17">
+
+<title>SelecTree - WORKING TITLE</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../site_libs/font-awesome-5.13.0/js/script.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">SelecTree</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">WORKING TITLE</h1>
+            <p class="subtitle lead">Week 2</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Kyle Nessen </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 17, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#previous-week-meeting-notes" id="toc-previous-week-meeting-notes" class="nav-link active" data-scroll-target="#previous-week-meeting-notes">Previous week meeting notes</a></li>
+  <li><a href="#database-access" id="toc-database-access" class="nav-link" data-scroll-target="#database-access">Database access</a></li>
+  <li><a href="#sunset-zones" id="toc-sunset-zones" class="nav-link" data-scroll-target="#sunset-zones">Sunset Zones</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="previous-week-meeting-notes" class="level2">
+<h2 class="anchored" data-anchor-id="previous-week-meeting-notes">Previous week meeting notes</h2>
+<ul>
+<li><p>Matt, May, and I met ahead of our meeting with Daniel and Logan.</p></li>
+<li><p>Matt identified that missing sunset species likely were not in The New Western Garden Book, and therefore there is nothing to look up in the book or on other websites.</p></li>
+<li><p>Matt told me to give him an equivalent species column for him to fill out which we can draw sunset zones from.</p></li>
+<li><p>May had me remove the zone columns in the Google Spreadsheet, as it would be easier to copy and paste from the SelecTree website.</p></li>
+<li><p>I offered to try to do a look-up with code for the missing sunset zones first before getting Caitlin involved.</p></li>
+<li><p>In terms of taxonomy, Matt wants to be presented a list of scientific names that are currently not accepted by a name parsing authority. He will go through and decide if it is a true synonym or not.</p></li>
+<li><p>Additionally, there is no need for full authorship names. Goal is to make it easy for people to find the tree species they are looking for.</p></li>
+<li><p>Meeting with Daniel and Logan was helpful. They provided their internal documentation for how the database is organized</p>
+<ul>
+<li><a href="https://muchquak.github.io/database/tables/" class="uri">https://muchquak.github.io/database/tables/</a></li>
+</ul></li>
+<li><p>Ideal format to send changes to them is a series of SQL statements that will update specific rows of the database. Alternatively csv files will work.</p>
+<ul>
+<li>More discussion is needed as both approaches sound messy and cumbersome.</li>
+</ul></li>
+<li><p>Lots of discussion about how I can access the database. Ultimately we settled on a database dump, which is a local copy I can explore. Logan sent this shortly after the meeting.</p></li>
+</ul>
+</section>
+<section id="database-access" class="level2">
+<h2 class="anchored" data-anchor-id="database-access">Database access</h2>
+<p>I’m very pleased to get access to the website database. The data is much more organized and it is far easier to find issues and incomplete information.</p>
+<p>For example, last week I identified a number of taxa that were missing the specific epithet in the scientific name. In order to find them, I had to pass the names through GBIF, and filter by those that had poor scores. This is an overly complicated process that is likely error prone.</p>
+<p>Now, I can simply pull up the <code>taxon</code> table and see <em>exactly</em> which names are missing in the <code>species</code> column. Here are the first ten as an example of what the taxon table looks like:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 18%">
+<col style="width: 17%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">taxon_id</th>
+<th style="text-align: right;">tree_id</th>
+<th style="text-align: left;">genus</th>
+<th style="text-align: left;">species</th>
+<th style="text-align: left;">hybrid_alt_species</th>
+<th style="text-align: left;">subspecies</th>
+<th style="text-align: left;">variety</th>
+<th style="text-align: left;">cultivar</th>
+<th style="text-align: left;">hybrid_x</th>
+<th style="text-align: left;">name_concat</th>
+<th style="text-align: left;">name_unformatted</th>
+<th style="text-align: right;">sequence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">174</td>
+<td style="text-align: left;">Arbutus</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Marina</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Arbutus ‘Marina’</td>
+<td style="text-align: left;">Arbutus ‘Marina’</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">220</td>
+<td style="text-align: right;">222</td>
+<td style="text-align: left;">Brugmansia</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Charles Grimaldi</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Brugmansia ‘Charles Grimaldi’</td>
+<td style="text-align: left;">Brugmansia ‘Charles Grimaldi’</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">267</td>
+<td style="text-align: right;">270</td>
+<td style="text-align: left;">Castanea</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Colossal</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Castanea ‘Colossal’</td>
+<td style="text-align: left;">Castanea ‘Colossal’</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">279</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: left;">Ceanothus</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ray Hartman</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ceanothus ‘Ray Hartman’</td>
+<td style="text-align: left;">Ceanothus ‘Ray Hartman’</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">440</td>
+<td style="text-align: right;">444</td>
+<td style="text-align: left;">Crataegus</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Autumn Glory</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Crataegus ‘Autumn Glory’</td>
+<td style="text-align: left;">Crataegus ‘Autumn Glory’</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">604</td>
+<td style="text-align: right;">619</td>
+<td style="text-align: left;">Fraxinus</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Fan-West</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Fraxinus ‘Fan-West’</td>
+<td style="text-align: left;">Fraxinus ‘Fan-West’</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">696</td>
+<td style="text-align: right;">711</td>
+<td style="text-align: left;">Ilex</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Nellie R. Stevens</td>
+<td style="text-align: left;">cultivar</td>
+<td style="text-align: left;">Ilex &amp;times ‘Nellie R. Stevens’</td>
+<td style="text-align: left;">Ilex x ‘Nellie R. Stevens’</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">697</td>
+<td style="text-align: right;">712</td>
+<td style="text-align: left;">Ilex</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">San Jose</td>
+<td style="text-align: left;">cultivar</td>
+<td style="text-align: left;">Ilex &amp;times ‘San Jose’</td>
+<td style="text-align: left;">Ilex x ‘San Jose’</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">698</td>
+<td style="text-align: right;">713</td>
+<td style="text-align: left;">Ilex</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Wilsonii</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ilex ‘Wilsonii’</td>
+<td style="text-align: left;">Ilex ‘Wilsonii’</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">772</td>
+<td style="text-align: right;">787</td>
+<td style="text-align: left;">Lagerstroemia</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Muskogee</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lagerstroemia ‘Muskogee’</td>
+<td style="text-align: left;">Lagerstroemia ‘Muskogee’</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Last week, I said there was at least <code>43</code> incomplete names, but the actual number is <code>59</code>. Some of those new names are synonyms, however.</p>
+<p>Here is a new Google Sheet with those species. This seems like a good task for <strong>Caitlin</strong> to fill out the missing info. I’ve highlighted the column that needs to be completed, but she should use additional columns as needed.</p>
+<div style="text-align: center;">
+    <a href="https://docs.google.com/spreadsheets/d/1M8G44zQhIH3dLPVRxgsRYe7laZQMAnzr5vBvO-duObk/edit?usp=sharing" target="_blank" style="background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 20px 40px; /* Size of the button */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px; /* Font size */
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;">SelecTree - Missing Specific Epithets</a>
+</div>
+</section>
+<section id="sunset-zones" class="level2">
+<h2 class="anchored" data-anchor-id="sunset-zones">Sunset Zones</h2>
+<p>After our meeting last week, Matt went through and added analogous tree species for our missing sunset zones. I took those names and looked up the zone values we have stored already.</p>
+<p>Only two species had issues:</p>
+<ol type="1">
+<li><em>Ulmus chinensis</em> is not in SelecTree. I assume Matt meant <em>Ulmus parvifolia</em>. Let me know if that’s not the case.</li>
+<li><em>Vitex negundo</em> is not in SelecTree (only the cultivar), and I cannot find anything online for sunset zones. <strong>This is the only missing tree for sunset zones</strong>. If you give me an alternative, I can easily fix it.</li>
+</ol>
+<p>I’ve generated a csv below that should be straightforward to incorporate into the production database of the website. I can go into the details in our meeting if you want, but essentially each row represents a sunset zone, with tree_id repeating if a species has multiple zones.</p>
+<p>This new csv is almost 1000 rows long, so writing out SQL statements as Logan suggested is impractical. A bit of searching indicates that he should be able to load this csv into some scripting language and insert the new values easily. I could also do this, but I don’t have access to their SQL database and I’m still not an admin on the website. I think long-term, everyone would be happier if we reduce middlemen, so I would like to explore options on how I can update the database directly.</p>
+<p>Let me know if you’d like me to coordinate with Logan about the updated sunset zones csv.</p>
+<div style="text-align: center;">
+<div class="cell">
+<div class="cell-output-display">
+<button class="btn btn-default" onclick="fetch('data:text/csv;base64,dHJlZV9pZCxzdW5zZXRfem9uZQoxODQ2LDEzCjE4NDYsMTQKMTg0NiwxNQoxODQ2LDE2CjE4NDYsMTcKMTg0NiwxOAoxODQ2LDE5CjE4NDYsMjAKMTg0NiwyMQoxODQ2LDIyCjE4NDYsMjMKMTg0NiwyNAoxODQ2LDcKMTg0Niw4CjE4NDYsOQoxOTk4LDEwCjE5OTgsMTEKMTk5OCwxMgoxOTk4LDEzCjE5OTgsMTQKMTk5OCwxNQoxOTk4LDE2CjE5OTgsMTcKMTk5OCwxOAoxOTk4LDE5CjE5OTgsMjAKMTk5OCwyMQoxOTk4LDIyCjE5OTgsMjMKMTk5OCwyNAoxOTk4LDQKMTk5OCw1CjE5OTgsNgoxOTk4LDcKMTk5OCw4CjE5OTgsOQoxMzk3LDE5CjEzOTcsMjAKMTM5NywyMQoxMzk3LDIyCjEzOTcsMjMKMTM5NywyNAoxMzk3LEgxCjEzOTcsSDIKOTY5LEgxCjk2OSxIMgoxODM4LDE0CjE4MzgsMTUKMTgzOCwxNgoxODM4LDE3CjE4MzgsNAoxODM4LDUKMTgzOCw2CjE4MzgsNwoxNzY0LEgxCjE3NjQsSDIKMTc2NCxIMQoxNzY0LEgyCjE0NDcsMTAKMTQ0NywxMQoxNDQ3LDEyCjE0NDcsMTMKMTQ0NywxNAoxNDQ3LDE1CjE0NDcsMTYKMTQ0NywxNwoxNDQ3LDE4CjE0NDcsMTkKMTQ0NywyMAoxNDQ3LDIxCjE0NDcsMjIKMTQ0NywyMwoxNDQ3LDI0CjE0NDcsOAoxNDQ3LDkKMTk4NiwxMAoxOTg2LDExCjE5ODYsMTIKMTk4NiwxMwoxOTg2LDE0CjE5ODYsMTUKMTk4NiwxNgoxOTg2LDE3CjE5ODYsMTgKMTk4NiwxOQoxOTg2LDIwCjE5ODYsMjEKMTk4NiwyMgoxOTg2LDIzCjE5ODYsMjQKMTk4Niw1CjE5ODYsNgoxOTg2LDgKMTk4Niw5CjIwMTIsMjEKMjAxMiwyMgoyMDEyLDIzCjIwMTIsMjQKMjAxMSwyMQoyMDExLDIyCjIwMTEsMjMKMjAxMSwyNAoyMDExLEgxCjIwMTEsSDIKMTc2MSwyMQoxNzYxLDIyCjE3NjEsMjMKMTc2MSwyNAoxNzYxLEgxCjE3NjEsSDIKMTEyMCwyMQoxMTIwLDIyCjExMjAsMjMKMTEyMCwyNAoxMTIwLEgxCjExMjAsSDIKMTMxNiwyMQoxMzE2LDIyCjEzMTYsMjMKMTMxNiwyNAoxMzE2LEgxCjEzMTYsSDIKMTgyMSwyMQoxODIxLDIyCjE4MjEsMjMKMTgyMSwyNAoxODIxLEgxCjE4MjEsSDIKMTMzMiwyMQoxMzMyLDIyCjEzMzIsMjMKMTMzMiwyNAoxMzMyLEgxCjEzMzIsSDIKMTk5NyxIMQoxOTk3LEgyCjE5MDYsMTIKMTkwNiwxMwoxOTA2LDE1CjE5MDYsMTYKMTkwNiwxNwoxOTA2LDE4CjE5MDYsMTkKMTkwNiwyMAoxOTA2LDIxCjE5MDYsMjIKMTkwNiwyMwoxOTA2LDI0CjE5MDYsSDEKMTkwNixIMgoxODMyLDEKMTgzMiwxMAoxODMyLDExCjE4MzIsMTIKMTgzMiwxMwoxODMyLDE0CjE4MzIsMTUKMTgzMiwxNgoxODMyLDE3CjE4MzIsMTgKMTgzMiwxOQoxODMyLDIKMTgzMiwyMAoxODMyLDIxCjE4MzIsMjIKMTgzMiwyMwoxODMyLDI0CjE4MzIsMwoxODMyLDQKMTgzMiw1CjE4MzIsNgoxODMyLDcKMTgzMiw4CjE4MzIsOQoxOTk5LDEKMTk5OSwxMAoxOTk5LDExCjE5OTksMTIKMTk5OSwxMwoxOTk5LDE0CjE5OTksMTUKMTk5OSwxNgoxOTk5LDE3CjE5OTksMTgKMTk5OSwxOQoxOTk5LDIKMTk5OSwyMAoxOTk5LDIxCjE5OTksMjIKMTk5OSwyMwoxOTk5LDI0CjE5OTksMwoxOTk5LDQKMTk5OSw1CjE5OTksNgoxOTk5LDcKMTk5OSw4CjE5OTksOQoxOTA3LDIzCjE5MDcsMjQKMTkwNyxIMQoxOTA3LEgyCjEwMjcsMTAKMTAyNywxMQoxMDI3LDEyCjEwMjcsMTQKMTAyNywxNQoxMDI3LDE2CjEwMjcsMTcKMTAyNywxOAoxMDI3LDE5CjEwMjcsMjAKMTAyNywyMQoxMDI3LDIyCjEwMjcsMjMKMTAyNywyNAoxMDI3LDQKMTAyNyw1CjEwMjcsNgoxMDI3LDcKMTAyNyw4CjEwMjcsOQoxMDI3LEgxCjEwMjcsSDIKOTc2LDEwCjk3NiwxNAo5NzYsMTUKOTc2LDE2Cjk3NiwxNwo5NzYsMTgKOTc2LDE5Cjk3NiwyMAo5NzYsMjEKOTc2LDIyCjk3NiwyMwo5NzYsMjQKOTc2LDQKOTc2LDUKOTc2LDYKOTc2LDcKOTc2LDgKOTc2LDkKMTkxOSwxMAoxOTE5LDExCjE5MTksMTIKMTkxOSwxMwoxOTE5LDE4CjE5MTksMTkKMTkxOSwyMAoxOTE5LDIxCjE5MTksMjIKMTkxOSwyMwoxOTE5LDI0CjExNTAsMTAKMTE1MCwxMQoxMTUwLDEyCjExNTAsMTMKMTE1MCwxNAoxMTUwLDE1CjExNTAsMTYKMTE1MCwxNwoxMTUwLDE4CjExNTAsMTkKMTE1MCwyCjExNTAsMjAKMTE1MCwyMQoxMTUwLDIyCjExNTAsMwoxMTUwLDQKMTE1MCw1CjExNTAsNgoxMTUwLDcKMTE1MCw4CjExNTAsOQoxMTY5LDEwCjExNjksMTEKMTE2OSwxMgoxMTY5LDEzCjExNjksMTQKMTE2OSwxNQoxMTY5LDE2CjExNjksMTcKMTE2OSwxOAoxMTY5LDE5CjExNjksMgoxMTY5LDIwCjExNjksMjEKMTE2OSwyMgoxMTY5LDMKMTE2OSw0CjExNjksNQoxMTY5LDYKMTE2OSw3CjExNjksOAoxMTY5LDkKMTE5MCwxMAoxMTkwLDExCjExOTAsMTIKMTE5MCwxMwoxMTkwLDE0CjExOTAsMTUKMTE5MCwxNgoxMTkwLDE3CjExOTAsMTgKMTE5MCwxOQoxMTkwLDIKMTE5MCwyMAoxMTkwLDIxCjExOTAsMjIKMTE5MCwzCjExOTAsNAoxMTkwLDUKMTE5MCw2CjExOTAsNwoxMTkwLDgKMTE5MCw5CjE4MzEsMTQKMTgzMSwxNQoxODMxLDE2CjE4MzEsMTcKMTgzMSwxOAoxODMxLDE5CjE4MzEsMjAKMTgzMSwyMQoxODMxLDIyCjE4MzEsMjMKMTgzMSwyNAoxODMxLDQKMTgzMSw1CjE4MzEsNgoxODMxLDcKMTgzMSw4CjE4MzEsOQoyMjcsMTQKMjI3LDE1CjIyNywxNgoyMjcsMTcKMjI3LDE4CjIyNywxOQoyMjcsMjAKMjI3LDIxCjIyNywyMgoyMjcsMjMKMjI3LDI0CjIyNyw0CjIyNyw1CjIyNyw2CjIyNyw3CjIyNyw4CjIyNyw5CjE4NjAsMTQKMTg2MCwxNQoxODYwLDE2CjE4NjAsMTcKMTg2MCwxOAoxODYwLDE5CjE4NjAsMjAKMTg2MCwyMQoxODYwLDIyCjE4NjAsMjMKMTg2MCwyNAoxODYwLDcKMTg2MCw4CjE4NjAsOQoxODQ5LDE0CjE4NDksMTUKMTg0OSwxNgoxODQ5LDE3CjE4NDksMTgKMTg0OSwxOQoxODQ5LDIwCjE4NDksMjEKMTg0OSwyMgoxODQ5LDIzCjE4NDksMjQKMTg0OSw3CjE4NDksOAoxODQ5LDkKMTg1NSwxMAoxODU1LDExCjE4NTUsMTQKMTg1NSwxNQoxODU1LDE2CjE4NTUsMTcKMTg1NSwxOAoxODU1LDE5CjE4NTUsMjAKMTg1NSwyMQoxODU1LDIyCjE4NTUsMjMKMTg1NSwyNAoxODU1LDMKMTg1NSw0CjE4NTUsNQoxODU1LDYKMTg1NSw3CjE4NTUsOAoxODU1LDkKMTkwMSwxCjE5MDEsMTAKMTkwMSwxMQoxOTAxLDE0CjE5MDEsMTUKMTkwMSwxNgoxOTAxLDE3CjE5MDEsMTgKMTkwMSwxOQoxOTAxLDIKMTkwMSwyMAoxOTAxLDIxCjE5MDEsMjIKMTkwMSwyMwoxOTAxLDMKMTkwMSw0CjE5MDEsNQoxOTAxLDYKMTkwMSw3CjE5MDEsOAoxOTAxLDkKMTkwMywxCjE5MDMsMTAKMTkwMywxMQoxOTAzLDE0CjE5MDMsMTUKMTkwMywxNgoxOTAzLDE3CjE5MDMsMTgKMTkwMywxOQoxOTAzLDIKMTkwMywyMAoxOTAzLDIxCjE5MDMsMjIKMTkwMywyMwoxOTAzLDMKMTkwMyw0CjE5MDMsNQoxOTAzLDYKMTkwMyw3CjE5MDMsOAoxOTAzLDkKMTI1NSwxMAoxMjU1LDExCjEyNTUsMTIKMTI1NSwxNAoxMjU1LDE1CjEyNTUsMTYKMTI1NSwxNwoxMjU1LDIKMTI1NSwzCjEyNTUsNAoxMjU1LDUKMTI1NSw2CjEyNTUsNwoxMjU1LDgKMTI1NSw5CjE5MDUsMTAKMTkwNSwxMQoxOTA1LDEyCjE5MDUsMTQKMTkwNSwxNQoxOTA1LDE2CjE5MDUsMTcKMTkwNSwyCjE5MDUsMwoxOTA1LDQKMTkwNSw1CjE5MDUsNgoxOTA1LDcKMTkwNSw4CjE5MDUsOQoxOTA0LDEKMTkwNCwxMAoxOTA0LDE0CjE5MDQsMTUKMTkwNCwxNgoxOTA0LDE3CjE5MDQsMTgKMTkwNCwxOQoxOTA0LDIKMTkwNCwyMAoxOTA0LDIxCjE5MDQsMjIKMTkwNCwyMwoxOTA0LDI0CjE5MDQsMwoxOTA0LDQKMTkwNCw1CjE5MDQsNgoxOTA0LDcKMTkwNCw4CjE5MDQsOQoxMjgxLDEKMTI4MSwxMAoxMjgxLDE0CjEyODEsMTUKMTI4MSwxNgoxMjgxLDE3CjEyODEsMgoxMjgxLDMKMTI4MSw0CjEyODEsNQoxMjgxLDYKMTI4MSw3CjEyODEsOAoxMjgxLDkKMTI4NSwxCjEyODUsMTAKMTI4NSwxNAoxMjg1LDE1CjEyODUsMTYKMTI4NSwxNwoxMjg1LDIKMTI4NSwzCjEyODUsNAoxMjg1LDUKMTI4NSw2CjEyODUsNwoxMjg1LDgKMTI4NSw5CjE3ODksMTIKMTc4OSwxMwoxNzg5LDE0CjE3ODksMTUKMTc4OSwxNgoxNzg5LDE3CjE3ODksMTgKMTc4OSwxOQoxNzg5LDIwCjE3ODksMjEKMTc4OSwyMgoxNzg5LDIzCjE3ODksMjQKMTc4OSw4CjE3ODksOQoxNzg5LEgxCjE3ODksSDIKMTUwMSwxMwoxNTAxLDE0CjE1MDEsMTUKMTUwMSwxNgoxNTAxLDE3CjE1MDEsMTkKMTUwMSwyMAoxNTAxLDIxCjE1MDEsMjIKMTUwMSwyMwoxNTAxLDI0CjE5ODksMTQKMTk4OSwxNQoxOTg5LDE2CjE5ODksMTcKMTk4OSwxOAoxOTg5LDE5CjE5ODksMjAKMTk4OSwyMQoxOTg5LDIyCjE5ODksMjMKMTk4OSwyNAoxOTg5LDQKMTk4OSw1CjE5ODksNgoxOTg5LDcKMTk4OSw4CjE5ODksOQoxOTkwLDE0CjE5OTAsMTUKMTk5MCwxNgoxOTkwLDE3CjE5OTAsMTgKMTk5MCwxOQoxOTkwLDIwCjE5OTAsMjEKMTk5MCwyMgoxOTkwLDIzCjE5OTAsMjQKMTk5MCw0CjE5OTAsNQoxOTkwLDYKMTk5MCw3CjE5OTAsOAoxOTkwLDkKMTgzNywxNAoxODM3LDE1CjE4MzcsMTYKMTgzNywxNwoxODM3LDE4CjE4MzcsMTkKMTgzNywyMAoxODM3LDIxCjE4MzcsMjIKMTgzNywyMwoxODM3LDI0CjE4MzcsNAoxODM3LDUKMTgzNyw2CjE4MzcsNwoxODM3LDgKMTgzNyw5CjE3NTgsMTQKMTc1OCwxNQoxNzU4LDE2CjE3NTgsMTcKMTc1OCwxOAoxNzU4LDE5CjE3NTgsMjAKMTc1OCwyMQoxNzU4LDIyCjE3NTgsMjMKMTc1OCwyNAoxNzU4LDQKMTc1OCw1CjE3NTgsNgoxNzU4LDcKMTc1OCw4CjE3NTgsOQoxOTY2LDE0CjE5NjYsMTUKMTk2NiwxNgoxOTY2LDE3CjE5NjYsMTgKMTk2NiwxOQoxOTY2LDIwCjE5NjYsMjEKMTk2NiwyMgoxOTY2LDIzCjE5NjYsMjQKMTk2Niw0CjE5NjYsNQoxOTY2LDYKMTk2Niw3CjE5NjYsOAoxOTY2LDkKMjAwNywxNAoyMDA3LDE1CjIwMDcsMTYKMjAwNywxNwoyMDA3LDE4CjIwMDcsMTkKMjAwNywyMAoyMDA3LDIxCjIwMDcsMjIKMjAwNywyMwoyMDA3LDI0CjIwMDcsNAoyMDA3LDUKMjAwNyw2CjIwMDcsNwoyMDA3LDgKMjAwNyw5CjEzMzMsMjMKMTMzMywyNAoxODUxLDIzCjE4NTEsMjQKMTg0NCwyMwoxODQ0LDI0CjE3NzQsMTAKMTc3NCwxNAoxNzc0LDE1CjE3NzQsMTYKMTc3NCwxNwoxNzc0LDIKMTc3NCwzCjE3NzQsNAoxNzc0LDUKMTc3NCw2CjE3NzQsNwoxNzc0LDgKMTc3NCw5CjE1MDMsMQoxNTAzLDEwCjE1MDMsMTEKMTUwMywxMgoxNTAzLDEzCjE1MDMsMTQKMTUwMywxNQoxNTAzLDE2CjE1MDMsMTcKMTUwMywyCjE1MDMsMwoxNTAzLDQKMTUwMyw1CjE1MDMsNgoxNTAzLDcKMTUwMyw4CjE1MDMsOQoxOTk2LDE1CjE5OTYsMTYKMTk5NiwxNwoxOTk2LDE4CjE5OTYsMTkKMTk5NiwyMAoxOTk2LDIxCjE5OTYsMjIKMTk5NiwyMwoxOTk2LDI0CjE4OTksMTUKMTg5OSwxNgoxODk5LDE3CjE4OTksMTgKMTg5OSwxOQoxODk5LDIwCjE4OTksMjEKMTg5OSwyMgoxODk5LDIzCjE4OTksMjQKMTcwMiwxNQoxNzAyLDE2CjE3MDIsMTcKMTcwMiwxOAoxNzAyLDE5CjE3MDIsMjAKMTcwMiwyMQoxNzAyLDIyCjE3MDIsMjMKMTcwMiwyNAoxNDMyLDEKMTQzMiwxMAoxNDMyLDExCjE0MzIsMTQKMTQzMiwxNQoxNDMyLDE2CjE0MzIsMTcKMTQzMiwxOAoxNDMyLDE5CjE0MzIsMgoxNDMyLDIwCjE0MzIsMjEKMTQzMiwzCjE0MzIsNAoxNDMyLDUKMTQzMiw2CjE0MzIsNwoxNDMyLDgKMTQzMiw5CjE0MzYsMTAKMTQzNiwxMQoxNDM2LDEyCjE0MzYsMTMKMTQzNiwxNAoxNDM2LDE1CjE0MzYsMTYKMTQzNiwxNwoxNDM2LDE4CjE0MzYsMTkKMTQzNiwyMAoxNDM2LDIxCjE0MzYsMjIKMTQzNiwyMwoxNDM2LDI0CjE0MzYsMwoxNDM2LDQKMTQzNiw1CjE0MzYsNgoxNDM2LDcKMTQzNiw4CjE0MzYsOQoxNjA5LDEwCjE2MDksMTEKMTYwOSwxMgoxNjA5LDEzCjE2MDksMTQKMTYwOSwxNQoxNjA5LDE2CjE2MDksMTcKMTYwOSwxOAoxNjA5LDE5CjE2MDksMjAKMTYwOSwyMQoxNjA5LDIyCjE2MDksMjMKMTYwOSwyNAoxNjA5LDMKMTYwOSw0CjE2MDksNQoxNjA5LDYKMTYwOSw3CjE2MDksOAoxNjA5LDkKMTgyOSwxNAoxODI5LDE1CjE4MjksMTYKMTgyOSwxNwoxODI5LDE4CjE4MjksMTkKMTgyOSwyMAoxODI5LDIxCjE4MjksMjIKMTgyOSwyMwoxODI5LDI0CjE4MjksNAoxODI5LDUKMTgyOSw2CjE4MjksNwoxODI5LDgKMTgyOSw5CjE4MzMsMTQKMTgzMywxNQoxODMzLDE2CjE4MzMsMTcKMTgzMywxOAoxODMzLDE5CjE4MzMsMjAKMTgzMywyMQoxODMzLDIyCjE4MzMsMjMKMTgzMywyNAoxODMzLDQKMTgzMyw1CjE4MzMsNgoxODMzLDcKMTgzMyw4CjE4MzMsOQoxOTg0LDE0CjE5ODQsMTUKMTk4NCwxNgoxOTg0LDE3CjE5ODQsMTgKMTk4NCwxOQoxOTg0LDIwCjE5ODQsMjEKMTk4NCwyMgoxOTg0LDIzCjE5ODQsMjQKMTk4NCw0CjE5ODQsNQoxOTg0LDYKMTk4NCw3CjE5ODQsOAoxOTg0LDkKMTgzNiwxNAoxODM2LDE1CjE4MzYsMTYKMTgzNiwxNwoxODM2LDE4CjE4MzYsMTkKMTgzNiwyMAoxODM2LDIxCjE4MzYsMjIKMTgzNiwyMwoxODM2LDI0CjE4MzYsNAoxODM2LDUKMTgzNiw2CjE4MzYsNwoxODM2LDgKMTgzNiw5CjIwMDQsMTQKMjAwNCwxNQoyMDA0LDE2CjIwMDQsMTcKMjAwNCwxOAoyMDA0LDE5CjIwMDQsMjAKMjAwNCwyMQoyMDA0LDIyCjIwMDQsMjMKMjAwNCwyNAoyMDA0LDQKMjAwNCw1CjIwMDQsNgoyMDA0LDcKMjAwNCw4CjIwMDQsOQoxODM5LDE0CjE4MzksMTUKMTgzOSwxNgoxODM5LDE3CjE4MzksMTgKMTgzOSwxOQoxODM5LDIwCjE4MzksMjEKMTgzOSwyMgoxODM5LDIzCjE4MzksMjQKMTgzOSw0CjE4MzksNQoxODM5LDYKMTgzOSw3CjE4MzksOAoxODM5LDkKMTg1MCwxNAoxODUwLDE1CjE4NTAsMTYKMTg1MCwxNwoxODUwLDE4CjE4NTAsMTkKMTg1MCwyMAoxODUwLDIxCjE4NTAsMjIKMTg1MCwyMwoxODUwLDI0CjE4NTAsNAoxODUwLDUKMTg1MCw2CjE4NTAsNwoxODUwLDgKMTg1MCw5CjE0MjEsMTQKMTQyMSwxNQoxNDIxLDE2CjE0MjEsMTcKMTQyMSwxOAoxNDIxLDE5CjE0MjEsMjAKMTQyMSwyMQoxNDIxLDIyCjE0MjEsMjMKMTQyMSwyNAoxNDIxLDQKMTQyMSw1CjE0MjEsNgoxNDIxLDcKMTQyMSw4CjE0MjEsOQoxNDIyLDE0CjE0MjIsMTUKMTQyMiwxNgoxNDIyLDE3CjE0MjIsMTgKMTQyMiwxOQoxNDIyLDIwCjE0MjIsMjEKMTQyMiwyMgoxNDIyLDIzCjE0MjIsMjQKMTQyMiw0CjE0MjIsNQoxNDIyLDYKMTQyMiw3CjE0MjIsOAoxNDIyLDkKMTg0NywxNAoxODQ3LDE1CjE4NDcsMTYKMTg0NywxNwoxODQ3LDE4CjE4NDcsMTkKMTg0NywyMAoxODQ3LDIxCjE4NDcsMjIKMTg0NywyMwoxODQ3LDI0CjE4NDcsNAoxODQ3LDUKMTg0Nyw2CjE4NDcsNwoxODQ3LDgKMTg0Nyw5CjE0NTksMTUKMTQ1OSwxNgoxNDU5LDE3CjE0NTksMTgKMTQ1OSwxOQoxNDU5LDIwCjE0NTksMjEKMTQ1OSwyMgoxNDU5LDIzCjE0NTksMjQKMTQ2MiwxNQoxNDYyLDE2CjE0NjIsMTcKMTQ2MiwxOAoxNDYyLDE5CjE0NjIsMjAKMTQ2MiwyMQoxNDYyLDIyCjE0NjIsMjMKMTQ2MiwyNAoxNDYzLDE1CjE0NjMsMTYKMTQ2MywxNwoxNDYzLDE4CjE0NjMsMTkKMTQ2MywyMAoxNDYzLDIxCjE0NjMsMjIKMTQ2MywyMwoxNDYzLDI0Cg==').then(res => res.blob()).then(blob => {
+      const downloadURL = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none'; // Hide the link
+      document.body.appendChild(a);
+      a.href = downloadURL;
+      a.download = 'db_ready_sunset_zones.csv';
+      a.click();
+      window.URL.revokeObjectURL(downloadURL);
+      document.body.removeChild(a);
+      return false;
+    });" has_icon="TRUE"><i class="fa fa-save"></i> Download updated sunset zones as csv</button>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

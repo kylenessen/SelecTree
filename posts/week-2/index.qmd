@@ -1,0 +1,151 @@
+---
+title: "WORKING TITLE"
+subtitle: "Week 2"
+author: "Kyle Nessen"
+date: "2024-01-17"
+toc: true
+categories: []
+format: 
+   html:
+     df-print: kable
+execute:
+  echo: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(RMySQL)
+con <- dbConnect(RMySQL::MySQL(), dbname = "selectree", host = "localhost", 
+                 port = 3306, user = "rstudio", password = "rstudio321")
+```
+
+## Previous week meeting notes
+
+-   Matt, May, and I met ahead of our meeting with Daniel and Logan.
+
+-   Matt identified that missing sunset species likely were not in The New Western Garden Book, and therefore there is nothing to look up in the book or on other websites.
+
+-   Matt told me to give him an equivalent species column for him to fill out which we can draw sunset zones from.
+
+-   May had me remove the zone columns in the Google Spreadsheet, as it would be easier to copy and paste from the SelecTree website.
+
+-   I offered to try to do a look-up with code for the missing sunset zones first before getting Caitlin involved.
+
+-   In terms of taxonomy, Matt wants to be presented a list of scientific names that are currently not accepted by a name parsing authority. He will go through and decide if it is a true synonym or not.
+
+-   Additionally, there is no need for full authorship names. Goal is to make it easy for people to find the tree species they are looking for.
+
+-   Meeting with Daniel and Logan was helpful. They provided their internal documentation for how the database is organized
+
+    -   <https://muchquak.github.io/database/tables/>
+
+-   Ideal format to send changes to them is a series of SQL statements that will update specific rows of the database. Alternatively csv files will work.
+
+    -   More discussion is needed as both approaches sound messy and cumbersome.
+
+-   Lots of discussion about how I can access the database. Ultimately we settled on a database dump, which is a local copy I can explore. Logan sent this shortly after the meeting.
+
+## Database access
+
+I'm very pleased to get access to the website database. The data is much more organized and it is far easier to find issues and incomplete information.
+
+For example, last week I identified a number of taxa that were missing the specific epithet in the scientific name. In order to find them, I had to pass the names through GBIF, and filter by those that had poor scores. This is an overly complicated process that is likely error prone.
+
+Now, I can simply pull up the `taxon` table and see *exactly* which names are missing in the `species` column. Here are the first ten as an example of what the taxon table looks like:
+
+```{r}
+taxon <- dbReadTable(con, "taxon")
+taxon %>% filter(species == "") %>% head(10)
+```
+
+Last week, I said there was at least `43` incomplete names, but the actual number is `59`. Some of those new names are synonyms, however.
+
+Here is a new Google Sheet with those species. This seems like a good task for **Caitlin** to fill out the missing info. I've highlighted the column that needs to be completed, but she should use additional columns as needed.
+
+```{r}
+missing_names <- taxon %>% filter(species == "")
+write_csv(missing_names,"missing_scientific_names_20240122.csv")
+```
+
+```{=html}
+<div style="text-align: center;">
+    <a href="https://docs.google.com/spreadsheets/d/1M8G44zQhIH3dLPVRxgsRYe7laZQMAnzr5vBvO-duObk/edit?usp=sharing" target="_blank" style="background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 20px 40px; /* Size of the button */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px; /* Font size */
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;">SelecTree - Missing Specific Epithets</a>
+</div>
+```
+## Sunset Zones
+
+After our meeting last week, Matt went through and added analogous tree species for our missing sunset zones. I took those names and looked up the zone values we have stored already.
+
+Only two species had issues:
+
+1.  *Ulmus chinensis* is not in SelecTree. I assume Matt meant *Ulmus parvifolia*. Let me know if that's not the case.
+2.  *Vitex negundo* is not in SelecTree (only the cultivar), and I cannot find anything online for sunset zones. **This is the only missing tree for sunset zones**. If you give me an alternative, I can easily fix it.
+
+I've generated a csv below that should be straightforward to incorporate into the production database of the website. I can go into the details in our meeting if you want, but essentially each row represents a sunset zone, with tree_id repeating if a species has multiple zones.
+
+This new csv is almost 1000 rows long, so writing out SQL statements as Logan suggested is impractical. A bit of searching indicates that he should be able to load this csv into some scripting language and insert the new values easily. I could also do this, but I don't have access to their SQL database and I'm still not an admin on the website. I think long-term, everyone would be happier if we reduce middlemen, so I would like to explore options on how I can update the database directly.
+
+Let me know if you'd like me to coordinate with Logan about the updated sunset zones csv.
+
+```{r}
+#| include: false
+library(readr)
+matt_zones <- read_csv("missing_sunset_zones_matt_completed_20240122.csv")
+
+# Perform the join
+matt_zones <- matt_zones %>%
+  left_join(taxon, by = c("Analgous Tree Species" = "name_unformatted"))
+
+# Manually add Osmanthus × fortunei
+matt_zones$tree_id.y[23] <- 977
+
+# TODO add value for Vitex negundo 'Heterophylla'
+#matt_zones$tree_id.y[72] <- 
+
+matt_zones <- matt_zones %>%
+  select(tree_id.x, tree_id.y) %>%
+  rename(
+    tree_id = tree_id.x,
+    reference_tree_id = tree_id.y
+  ) %>%
+  filter(complete.cases(.)) # Will filter out Vitex
+
+sunset_zones <- dbReadTable(con, "sunset_zone")
+
+zones_joined <- matt_zones %>%
+  left_join(sunset_zones, by = c("reference_tree_id" = "tree_id"))
+
+zones_joined <- zones_joined %>% select(c(tree_id,sunset_zone))
+
+write_csv(zones_joined,"db_ready_sunset_zones_20240122.csv")
+
+```
+
+::: {style="text-align: center;"}
+```{r}
+library(downloadthis)
+zones_joined %>%
+  download_this(
+    output_name = "db_ready_sunset_zones",
+    output_extension = ".csv",
+    button_label = "Download updated sunset zones as csv",
+    button_type = "default",
+    has_icon = TRUE,
+    icon = "fa fa-save",
+    csv2 = FALSE
+  )
+```
+:::
+
+

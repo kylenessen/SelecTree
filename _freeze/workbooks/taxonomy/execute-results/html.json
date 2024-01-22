@@ -1,0 +1,14 @@
+{
+  "hash": "818c5463e0fad262bbc585781e7cb662",
+  "result": {
+    "markdown": "---\ntitle: \"Taxonomy Workbook\"\nsubtitle: \"Week 1\"\nauthor: \"Kyle Nessen\"\ndate: \"2024-01-15\"\ntoc: true\ncategories: []\nformat: \n   html:\n     df-print: kable\nexecute:\n  echo: false\n  freeze: true\n  eval: false\n  include: false\n---\n\n\n## Load data\n\n\n\n\n\n## Create condensened dataframe\n\nI want to build my own taxonomy table, so I'm going to pull just tree ID and displayed scientific name. To start I'll make a copy of the scientific name column which I can start to clean\n\n\n\n\n\n## Clean scientific names\n\n-   &times = × = hybrid\n-   ' ' = horticultural variety\n-   Brugmansia 'Charles Grimaldi' (222) is missing specific epithet\n\n## Count all unique words\n\nI'm curious of there are any weird features in the dataset, like the hybrid symbol. Maybe there is other html hiding as well. Going to poke through this list to check\n\n\n\n\n\n## Strip white space and extra double spaces\n\n\n\n\n\n### Fix hybrid symbol\n\n\n\n\n\n### Assign taxonomic level\n\nHere I am giving a label if it is a species, variety, subspecies, or horticulture\n\n\n\n\n\n## Run gbif taxonomy\n\nHere I'm messing with GBIF and seeing if I can run the list through their service\n\n\n\n\n\n\n\n## Global Names Parser\n\nhttps://parser.globalnames.org/ Check this site out. I think it handles raw, messy names super well. Even caught the html tags\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

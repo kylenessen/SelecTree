@@ -1,7 +1,8 @@
 ---
 title: "SelecTree Data Analysis Documentation"
 listing:
-  contents: posts
+  contents:
+    - posts
   sort: "date desc"
   type: default
   categories: false

@@ -1,0 +1,60 @@
+taxon_id,tree_id,genus,species,hybrid_alt_species,subspecies,variety,cultivar,hybrid_x,name_concat,name_unformatted,sequence
+172,174,Arbutus,,,,,Marina,,Arbutus 'Marina',Arbutus 'Marina',1
+220,222,Brugmansia,,,,,Charles Grimaldi,,Brugmansia 'Charles Grimaldi',Brugmansia 'Charles Grimaldi',1
+267,270,Castanea,,,,,Colossal,,Castanea 'Colossal',Castanea 'Colossal',1
+279,282,Ceanothus,,,,,Ray Hartman,,Ceanothus 'Ray Hartman',Ceanothus 'Ray Hartman',1
+440,444,Crataegus,,,,,Autumn Glory,,Crataegus 'Autumn Glory',Crataegus 'Autumn Glory',1
+604,619,Fraxinus,,,,,Fan-West,,Fraxinus 'Fan-West',Fraxinus 'Fan-West',1
+696,711,Ilex,,,,,Nellie R. Stevens,cultivar,Ilex &times 'Nellie R. Stevens',Ilex x 'Nellie R. Stevens',1
+697,712,Ilex,,,,,San Jose,cultivar,Ilex &times 'San Jose',Ilex x 'San Jose',1
+698,713,Ilex,,,,,Wilsonii,,Ilex 'Wilsonii',Ilex 'Wilsonii',1
+772,787,Lagerstroemia,,,,,Muskogee,,Lagerstroemia 'Muskogee',Lagerstroemia 'Muskogee',1
+773,788,Lagerstroemia,,,,,Natchez,,Lagerstroemia 'Natchez',Lagerstroemia 'Natchez',1
+774,789,Lagerstroemia,,,,,Tuscarora,,Lagerstroemia 'Tuscarora',Lagerstroemia 'Tuscarora',1
+776,791,Lagerstroemia,,,,,Acoma,,Lagerstroemia 'Acoma',Lagerstroemia 'Acoma',1
+777,792,Lagerstroemia,,,,,Biloxi,,Lagerstroemia 'Biloxi',Lagerstroemia 'Biloxi',1
+782,797,Lagerstroemia,,,,,Seminole,,Lagerstroemia 'Seminole',Lagerstroemia 'Seminole',1
+788,803,Laurus,,,,,Saratoga,,Laurus 'Saratoga',Laurus 'Saratoga',1
+843,858,Magnolia,,,,,Galaxy,cultivar,Magnolia &times 'Galaxy',Magnolia x 'Galaxy',1
+844,859,Magnolia,,,,,Elizabeth,cultivar,Magnolia &times 'Elizabeth',Magnolia x 'Elizabeth',1
+845,860,Magnolia,,,,,Spectrum,cultivar,Magnolia &times 'Spectrum',Magnolia x 'Spectrum',1
+882,898,Malus,,,,,Klehms,,Malus 'Klehms',Malus 'Klehms',1
+883,899,Malus,,,,,Callaway,,Malus 'Callaway',Malus 'Callaway',1
+884,900,Malus,,,,,Dolgo,cultivar,Malus &times 'Dolgo',Malus x 'Dolgo',1
+885,901,Malus,,,,,Harvest Gold,cultivar,Malus &times 'Harvest Gold',Malus x 'Harvest Gold',1
+886,902,Malus,,,,,Hopa,cultivar,Malus &times 'Hopa',Malus x 'Hopa',1
+887,903,Malus,,,,,Radiant,cultivar,Malus &times 'Radiant',Malus x 'Radiant',1
+888,904,Malus,,,,,Red Jade,cultivar,Malus &times 'Red Jade',Malus x 'Red Jade',1
+889,905,Malus,,,,,Red Silver,cultivar,Malus &times 'Red Silver',Malus x 'Red Silver',1
+890,906,Malus,,,,,Snowdrift,cultivar,Malus &times 'Snowdrift',Malus x 'Snowdrift',1
+891,907,Malus,,,,,Spring Snow,cultivar,Malus &times 'Spring Snow',Malus x 'Spring Snow',1
+892,908,Malus,,,,,Arnoldiana,cultivar,Malus &times 'Arnoldiana',Malus x 'Arnoldiana',1
+897,913,Malus,,,,,Profusion,,Malus 'Profusion',Malus 'Profusion',1
+898,914,Malus,,,,,Red Jewel,cultivar,Malus &times 'Red Jewel',Malus x 'Red Jewel',1
+1128,1145,Prunus,,,,,Accolade,,Prunus 'Accolade',Prunus 'Accolade',1
+1129,1146,Prunus,,,,,Hally Jolivette,cultivar,Prunus &times 'Hally Jolivette',Prunus x 'Hally Jolivette',1
+1163,1180,Prunus,,,,,Beni-hoshi,,Prunus 'Beni-hoshi',Prunus 'Beni-hoshi',1
+1164,1181,Prunus,,,,,Kwanzan,,Prunus 'Kwanzan',Prunus 'Kwanzan',1
+1165,1182,Prunus,,,,,Shirofugen,,Prunus 'Shirofugen',Prunus 'Shirofugen',1
+1166,1183,Prunus,,,,,Shirotae,,Prunus 'Shirotae',Prunus 'Shirotae',1
+1258,1276,Rhaphiolepis,,,,,Montic,cultivar,Rhaphiolepis &times 'Montic',Rhaphiolepis x 'Montic',2
+1271,1289,Robinia,,,,,Purple Robe,,Robinia 'Purple Robe',Robinia 'Purple Robe',1
+1509,1530,Malus,,,,,Prairifire,,Malus 'Prairifire',Malus 'Prairifire',1
+1570,1591,Parkinsonia,,,,,Desert Museum,cultivar,Parkinsonia &times 'Desert Museum',Parkinsonia x 'Desert Museum',1
+1582,1604,Pistacia,,,,,Red Push,cultivar,Pistacia &times 'Red Push',Pistacia x 'Red Push',1
+1589,1611,Ulmus,,,,,Morton Accolade,,Ulmus 'Morton Accolade',Ulmus 'Morton Accolade',1
+2176,444,Crataegus,,,,,Crimson Glory,,Crataegus 'Crimson Glory',Crataegus 'Crimson Glory',2
+2177,445,Crataegus,,,,,Toba,,Crataegus 'Toba',Crataegus 'Toba',2
+2250,711,Ilex,,,,,Nellie R. Stevens,,Ilex 'Nellie R. Stevens',Ilex 'Nellie R. Stevens',2
+2314,898,Malus,,,,,Bechtel Klehm,,Malus 'Bechtel Klehm',Malus 'Bechtel Klehm',2
+2319,914,Malus,,,,,Red Jewel,,Malus 'Red Jewel',Malus 'Red Jewel',2
+2425,1276,Rhaphiolepis,,,,,Majestic Beauty,,Rhaphiolepis 'Majestic Beauty',Rhaphiolepis 'Majestic Beauty',3
+3157,1181,Prunus,,,,,Kanzan,,Prunus 'Kanzan',Prunus 'Kanzan',3
+3169,1300,Salix,,,,,Blanda,,Salix 'Blanda',Salix 'Blanda',3
+3363,1739,Eucalyptus,,NA,NA,NA,Moon Lagoon,NA,Eucalyptus 'Moon Lagoon',Eucalyptus 'Moon Lagoon',3
+3402,1752,Eucalyptus,,,,,Torwood,cultivar,Eucalyptus &times 'Torwood',Eucalyptus x 'Torwood',1
+3747,1853,Quercus,,comptoniae,,,,,Quercus &times comptoniae,Quercus x comptoniae,1
+3768,174,Arbutus,,NA,NA,NA,Marina,cultivar,Arbutus &times 'Marina',Arbutus x 'Marina',2
+3868,1908,Lagerstroemia,,,,,Zuni,,Lagerstroemia 'Zuni',Lagerstroemia 'Zuni',1
+3871,1910,Magnolia,,,,,Athene,species,Magnolia 'Athene',Magnolia 'Athene',1
+4147,2049,Aloe,,,,,Hercules,,Aloe 'Hercules',Aloe 'Hercules',1

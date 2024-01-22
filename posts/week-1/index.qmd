@@ -18,6 +18,7 @@ library(dplyr)
 library(knitr)
 library(stringr)
 library(kableExtra)
+library(tidyverse)
 setwd("~/Documents/Code/SelecTree/posts/week-1")
 
 df <- read_csv("~/Documents/Code/SelecTree/posts/Week-0/treedata_20240103.csv", 
@@ -140,4 +141,40 @@ This "better climate zones" project would no doubt take a lot of effort (maybe a
 
 ## Taxonomy
 
-For the rest of the week, I plan to really get into the taxonomy of the tree species. I want to build out a robust table that we all feel confident about. I will update this section as I make progress.
+I took the full list of names in selectTree and did a bit of cleaning. There wasn't a lot to do here in the end, I simply removed any double spaces (12 species in total) and fixed stray HTML tags (hybrid designation \`&times\`).
+
+While poking around in the data, I noticed [Brugmansia 'Charles Grimaldi'](https://selectree.calpoly.edu/tree-detail/222) is missing a specific epithet. I believe the correct name should be *Brugmansia versicolor* 'Charles Grimaldi'. This was only one opportunistic find, however.
+
+My next step was to run all the names through GBIF to see if there are any taxonomic issues with the names. Fortunately, most names seem to be in good shape.
+
+```{r}
+
+gbif <- read.csv("~/Documents/Code/SelecTree/posts/week-1/gbif.csv")
+count_df <- gbif %>% 
+  count(status, sort = TRUE)
+
+# Use kable to create a table with clickable links
+kable(count_df, col.names = c("Status", "Total Count"), 
+      format = "html", escape = FALSE, 
+      caption = "GBIF Taxonomy Results") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+There's also a confidence interval that GBIF provides. Querying the lowest matches (80%) finds more examples like *Brugmansia,* where the epithet appears to be dropped. I copy a few examples below, but a quick look indicates there are at least `43`.
+
+```{r}
+# Filter gbif to show me 10 rows where gbif$confidence is 80.
+low_score <- gbif %>% filter(confidence <= 80) %>% select(c('tree_id','verbatim_name'))
+# select 10 random rows
+low_score <- mutate(low_score, selectree_url = paste0("https://selectree.calpoly.edu/tree-detail/",tree_id))
+low_score <- mutate(low_score, selectree_url = paste0('<a href="', selectree_url, '">', selectree_url, '</a>'))
+low_score <- low_score %>% select(c('verbatim_name','selectree_url'))
+low_score <- head(low_score)
+
+kable(low_score, col.names = c("SelecTree Name", "SelecTree Page"), 
+      format = "html", escape = FALSE, 
+      caption = "Example Names Missing Specific Epithet") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+There's more work to be done here to untangle what is going on. Ultimately, I would like to produce a list of tree IDs and updated names for the site. At a later meeting, we should talk about synonyms and whether or not they should be updated. Additionally, I can get deep into finding all synonyms for all species on GBIF. It seems like there is plenty left to collect. Perhaps more than is worth sharing.
