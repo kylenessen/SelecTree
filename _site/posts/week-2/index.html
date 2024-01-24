@@ -9,7 +9,7 @@
 <meta name="author" content="Kyle Nessen">
 <meta name="dcterms.date" content="2024-01-17">
 
-<title>SelecTree - WORKING TITLE</title>
+<title>SelecTree - Database access, synonyms, and completed sunset zones</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">WORKING TITLE</h1>
+      <h1 class="title">Database access, synonyms, and completed sunset zones</h1>
             <p class="subtitle lead">Week 2</p>
                       </div>
   </div>
@@ -136,6 +136,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#previous-week-meeting-notes" id="toc-previous-week-meeting-notes" class="nav-link active" data-scroll-target="#previous-week-meeting-notes">Previous week meeting notes</a></li>
   <li><a href="#database-access" id="toc-database-access" class="nav-link" data-scroll-target="#database-access">Database access</a></li>
   <li><a href="#sunset-zones" id="toc-sunset-zones" class="nav-link" data-scroll-target="#sunset-zones">Sunset Zones</a></li>
+  <li><a href="#synonyms" id="toc-synonyms" class="nav-link" data-scroll-target="#synonyms">Synonyms</a></li>
   </ul>
 </nav>
     </div>
@@ -149,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="previous-week-meeting-notes">Previous week meeting notes</h2>
 <ul>
 <li><p>Matt, May, and I met ahead of our meeting with Daniel and Logan.</p></li>
-<li><p>Matt identified that missing sunset species likely were not in The New Western Garden Book, and therefore there is nothing to look up in the book or on other websites.</p></li>
+<li><p>Matt identified that missing sunset species likely were not in The New Western Garden Book, and therefore nothing to look up in the book or on other websites.</p></li>
 <li><p>Matt told me to give him an equivalent species column for him to fill out which we can draw sunset zones from.</p></li>
 <li><p>May had me remove the zone columns in the Google Spreadsheet, as it would be easier to copy and paste from the SelecTree website.</p></li>
 <li><p>I offered to try to do a look-up with code for the missing sunset zones first before getting Caitlin involved.</p></li>
@@ -396,6 +397,31 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section>
+<section id="synonyms" class="level2">
+<h2 class="anchored" data-anchor-id="synonyms">Synonyms</h2>
+<p>With the updated list of names from the database, I re-ran the species through GBIF to look for synonyms. I only ran a subset, however. Here are the conditions I used to generate the shortened list:</p>
+<ul>
+<li><p>I only ran SelecTree accepted names (where <code>sequence = 1</code> in the <code>taxon</code> table)</p></li>
+<li><p>GBIF does not handle cultivars, so I excluded them from the list as they seem to share the same species</p></li>
+<li><p>I excluded the problematic names mentioned above</p></li>
+</ul>
+<p>That left me with a total of <code>1233</code> species to check. Of those, <code>1131</code> or ~92% were perfect matches that GBIF agrees are accepted names.</p>
+<p>For perfect matches that GBIF considers a synonym (<code>83</code> total), I’ve created another Google Sheet linked below. You can see the SelecTree name as well as the scientific name GBIF considers accepted. They are hyperlinked to the GBIF page for each species. I also included an “Overrule Synonym?” column that you can check if you want to ignore GBIF’s taxonomy. Notes are optional, but the column is there.</p>
+<div style="text-align: center;">
+    <a href="https://docs.google.com/spreadsheets/d/1oYaqs0Sc435fjzUkST3pUITU1_su9fLd66ScU5RJ9fo/edit?usp=sharing" target="_blank" style="background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 20px 40px; /* Size of the button */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px; /* Font size */
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;">SelecTree Synonyms</a>
+</div>
+<p>There are about 18 other species that had some difficulty matching with GBIF. I will revisit these once the names above are resolved.</p>
 
 
 </section>

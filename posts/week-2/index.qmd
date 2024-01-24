@@ -1,5 +1,5 @@
 ---
-title: "WORKING TITLE"
+title: "Database access, synonyms, and completed sunset zones"
 subtitle: "Week 2"
 author: "Kyle Nessen"
 date: "2024-01-17"
@@ -24,7 +24,7 @@ con <- dbConnect(RMySQL::MySQL(), dbname = "selectree", host = "localhost",
 
 -   Matt, May, and I met ahead of our meeting with Daniel and Logan.
 
--   Matt identified that missing sunset species likely were not in The New Western Garden Book, and therefore there is nothing to look up in the book or on other websites.
+-   Matt identified that missing sunset species likely were not in The New Western Garden Book, and therefore nothing to look up in the book or on other websites.
 
 -   Matt told me to give him an equivalent species column for him to fill out which we can draw sunset zones from.
 
@@ -128,8 +128,6 @@ zones_joined <- matt_zones %>%
 
 zones_joined <- zones_joined %>% select(c(tree_id,sunset_zone))
 
-write_csv(zones_joined,"db_ready_sunset_zones_20240122.csv")
-
 ```
 
 ::: {style="text-align: center;"}
@@ -148,4 +146,33 @@ zones_joined %>%
 ```
 :::
 
+## Synonyms
 
+With the updated list of names from the database, I re-ran the species through GBIF to look for synonyms. I only ran a subset, however. Here are the conditions I used to generate the shortened list:
+
+-   I only ran SelecTree accepted names (where `sequence = 1` in the `taxon` table)
+
+-   GBIF does not handle cultivars, so I excluded them from the list as they seem to share the same species
+
+-   I excluded the problematic names mentioned above
+
+That left me with a total of `1233` species to check. Of those, `1131` or \~92% were perfect matches that GBIF agrees are accepted names.
+
+For perfect matches that GBIF considers a synonym (`83` total), I've created another Google Sheet linked below. You can see the SelecTree name as well as the scientific name GBIF considers accepted. They are hyperlinked to the GBIF page for each species. I also included an "Overrule Synonym?" column that you can check if you want to ignore GBIF's taxonomy. Notes are optional, but the column is there.
+
+```{=html}
+<div style="text-align: center;">
+    <a href="https://docs.google.com/spreadsheets/d/1oYaqs0Sc435fjzUkST3pUITU1_su9fLd66ScU5RJ9fo/edit?usp=sharing" target="_blank" style="background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 20px 40px; /* Size of the button */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px; /* Font size */
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;">SelecTree Synonyms</a>
+</div>
+```
+There are about 18 other species that had some difficulty matching with GBIF. I will revisit these once the names above are resolved.

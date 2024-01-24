@@ -18,203 +18,89 @@ execute:
 ## Load data
 
 ```{r}
-library(readr)
+#| warning: false
 library(tidyverse)
-df <- read_csv("~/Documents/Code/SelecTree/posts/Week-0/treedata_20240103.csv", 
-    col_types = cols(generic_2 = col_character(), 
-        pacific_island = col_logical(), display = col_logical(), 
-        california_native = col_logical(), 
-        ca_invasive = col_logical(), hi_native = col_logical(), 
-        invasive_text = col_character(), 
-        foliage_fall_color = col_logical(), 
-        fragrance = col_logical(), usda_zone = col_character(), 
-        pest_resistant = col_character(), 
-        deer_palatable = col_character(), 
-        schoolyard = col_logical()), show_col_types = FALSE)
-df
+library(RMySQL)
+con <- dbConnect(RMySQL::MySQL(), dbname = "selectree", host = "localhost", 
+                 port = 3306, user = "rstudio", password = "rstudio321")
 ```
-
-## Create condensed dataframe
-
-I want to build my own taxonomy table, so I'm going to pull just tree ID and displayed scientific name. To start I'll make a copy of the scientific name column which I can start to clean
 
 ```{r}
-df <- df %>% select(tree_id, displayed_scientific_name)
-df$scientific_name <- df$displayed_scientific_name
-df
+df <- dbReadTable(con, "taxon")
+df <- df %>% filter(species != "") %>% # filter out the problematic species we are dealing with separately
+      filter(sequence == 1) %>% # only search SelecTree accepted names
+      filter(cultivar == "") # GBIF doesn't handle cultivars, so remove from query
 ```
 
-## Clean scientific names
-
--   &times = × = hybrid
--   ' ' = horticultural variety
--   Brugmansia 'Charles Grimaldi' (222) is missing specific epithet
-
-## Count all unique words
-
-I'm curious of there are any weird features in the dataset, like the hybrid symbol. Maybe there is other html hiding as well. Going to poke through this list to check
-
-```{r}
-df %>% 
-  mutate(scientific_name = strsplit(scientific_name, " ")) %>% 
-  unnest(scientific_name) %>% 
-  count(scientific_name, sort = TRUE)
-
-```
-
-## Strip white space and extra double spaces
-
-```{r}
-df$scientific_name <- gsub( "  "," ", df$scientific_name)
-
-# removes white space before and after name
-df$displayed_scientific_name <- gsub( "^\\s+|\\s+$", "", df$displayed_scientific_name)
-df %>% filter(displayed_scientific_name != scientific_name)
-```
-
-### Fix hybrid symbol
-
-```{r}
-df$scientific_name <- gsub( "&times ","×", df$scientific_name)
-# shows only rows where displayed_scientific_name is different than scientific_name
-df %>% filter(displayed_scientific_name != scientific_name)
-
-```
-
-### Assign taxonomic level
-
-Here I am giving a label if it is a species, variety, subspecies, or horticulture
-
-```{r}
-df$taxonomic_level <- "species"
-df$taxonomic_level <- ifelse(grepl("var. ", df$scientific_name), "variety", df$taxonomic_level)
-df$taxonomic_level <- ifelse(grepl("subsp. ", df$scientific_name), "subspecies", df$taxonomic_level)
-df$taxonomic_level <- ifelse(grepl("×", df$scientific_name), "hybrid", df$taxonomic_level)
-df$taxonomic_level <- ifelse(grepl("'", df$scientific_name), "horticulture", df$taxonomic_level)
-df
-```
 
 ## Run gbif taxonomy
 
 Here I'm messing with GBIF and seeing if I can run the list through their service
 
+
+
 ```{r}
-#| eval: false
-#| include: false
+names <- df %>%
+  select(name_unformatted) %>%
+  pull(name_unformatted)
 
+# Now apply name_backbone to each verbatim_name
+gbif <- map_df(names, ~name_backbone(., strict = TRUE))
+```
 
-library(rgbif)
-library(dplyr)
-
-# Initialize an empty dataframe with the same structure as your 'gbif' data frame
-gbif <- data.frame(
-  usageKey = integer(), 
-  scientificName = character(), 
-  canonicalName = character(), 
-  rank = character(), 
-  status = character(), 
-  confidence = integer(), 
-  matchType = character(), 
-  kingdom = character(), 
-  phylum = character(), 
-  order = character(), 
-  family = character(), 
-  genus = character(), 
-  species = character(), 
-  kingdomKey = integer(), 
-  phylumKey = integer(), 
-  classKey = integer(), 
-  orderKey = integer(), 
-  familyKey = integer(), 
-  genusKey = integer(), 
-  speciesKey = integer(), 
-  synonym = logical(), 
-  class = character(), 
-  verbatim_name = character(), 
-  verbatim_kingdom = character(), 
-  stringsAsFactors = FALSE
-)
-
-# Get the total number of species to loop through
-total_species <- length(df$scientific_name)
-
-# Initialize a progress bar
-pb <- txtProgressBar(min = 0, max = total_species, style = 3)
-
-# Loop through the names in df$scientific_name
-for (i in seq_along(df$scientific_name)) {
-  name <- df$scientific_name[i]
+## Synonyms
+```{r}
+syns <- gbif %>% 
+  filter(status == "SYNONYM" & matchType == "EXACT") %>%
+  select(verbatim_name, usageKey, acceptedUsageKey) %>%
+  rowwise() %>%
+  mutate(acceptedCanonicalName = {
+    result <- name_usage(key = acceptedUsageKey)
+    # Assuming result is a list where the first element is the dataframe of interest
+    df <- result$data
+    if (is.data.frame(df) && "canonicalName" %in% names(df)) {
+      df$canonicalName
+    } else {
+      NA  # Return NA if the structure is not as expected
+    }
+  })%>%
+  mutate(selecTree_name_url = paste0("https://www.gbif.org/species/", usageKey)) %>%
+  mutate(accepted_name_url = paste0("https://www.gbif.org/species/", acceptedUsageKey))
   
-  # Retrieve taxonomic information for each name
-  temp <- tryCatch({
-            name_backbone(name, kingdom = "plants")
-          }, error = function(e) {
-            return(data.frame(
-              usageKey = NA, 
-              scientificName = NA, 
-              canonicalName = NA, 
-              rank = NA, 
-              status = NA, 
-              confidence = NA, 
-              matchType = NA, 
-              kingdom = NA, 
-              phylum = NA, 
-              order = NA, 
-              family = NA, 
-              genus = NA, 
-              species = NA, 
-              kingdomKey = NA, 
-              phylumKey = NA, 
-              classKey = NA, 
-              orderKey = NA, 
-              familyKey = NA, 
-              genusKey = NA, 
-              speciesKey = NA, 
-              synonym = NA, 
-              class = NA, 
-              verbatim_name = NA, 
-              verbatim_kingdom = NA
-            )) # Adjust the columns to match 'gbif's structure
-          })
-
-  missing_cols <- setdiff(names(gbif), names(temp))
-  for (col in missing_cols) {
-    temp[[col]] <- NA
-  }
-  # Ensure temp matches the structure of gbif
-  # Add any missing columns as NA and remove any extra columns
-  temp <- temp[, names(gbif)]
-  temp[names(gbif)[!names(gbif) %in% names(temp)]] <- NA
-
-  # Append the result to the gbif dataframe
-  gbif <- bind_rows(gbif, temp)
-  
-  setTxtProgressBar(pb, i)
-  #Sys.sleep(1)
-}
-# Close the progress bar
-close(pb)
-# View the result
-gbif
 ```
 
 ```{r}
-# map the original data back to gbif
-gbif <- left_join(gbif, df, by = c("verbatim_name" = "scientific_name"))
+
 ```
 
-## Global Names Parser
 
-https://parser.globalnames.org/ Check this site out. I think it handles raw, messy names super well. Even caught the html tags
+
+## Scratch
 
 ```{r}
-library(RMySQL)
-con <- dbConnect(RMySQL::MySQL(), dbname = "selectree", host = "localhost", 
-                 port = 3306, user = "rstudio", password = "rstudio321")
-
+# Filter all rows in gbif that DO NOT have matchType == "EXACT" and status == "ACCEPTED"
+problem_spp <- gbif %>% filter(matchType != "EXACT" | status != "ACCEPTED")
+no_problem_spp <- gbif %>% filter(matchType == "EXACT" & status == "ACCEPTED")
 ```
 
 ```{r}
-df <- dbReadTable(con, "taxon")
-
+# check to see if problem_spp and no_problem_spp have the same number of rows as gbif
+nrow(problem_spp) + nrow(no_problem_spp) == nrow(gbif)
 ```
+
+```{r}
+fuzzy <- problem_spp %>% filter(matchType == "FUZZY")
+
+# check to see if fuzzy$canonicalName is the same as fuzzy$verbatim_name
+fuzzy$canonicalName == fuzzy$verbatim_name
+```
+
+```{r}
+no_syns <- problem_spp %>% filter(status != "SYNONYM" | is.na(status))
+```
+
+```{r}
+syns <- gbif %>% filter(status == "SYNONYM" & matchType == "EXACT")
+```
+
+
