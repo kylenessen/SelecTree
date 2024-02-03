@@ -1,52 +1,108 @@
 [
   {
-    "objectID": "workbooks/taxonomy.html#create-condensened-dataframe",
-    "href": "workbooks/taxonomy.html#create-condensened-dataframe",
-    "title": "Taxonomy Workbook",
-    "section": "Create condensened dataframe",
-    "text": "Create condensened dataframe\nI want to build my own taxonomy table, so I’m going to pull just tree ID and displayed scientific name. To start I’ll make a copy of the scientific name column which I can start to clean"
-  },
-  {
-    "objectID": "workbooks/taxonomy.html#clean-scientific-names",
-    "href": "workbooks/taxonomy.html#clean-scientific-names",
-    "title": "Taxonomy Workbook",
-    "section": "Clean scientific names",
-    "text": "Clean scientific names\n\n&times = × = hybrid\n’ ’ = horticultural variety\nBrugmansia ‘Charles Grimaldi’ (222) is missing specific epithet"
-  },
-  {
-    "objectID": "workbooks/taxonomy.html#count-all-unique-words",
-    "href": "workbooks/taxonomy.html#count-all-unique-words",
-    "title": "Taxonomy Workbook",
-    "section": "Count all unique words",
-    "text": "Count all unique words\nI’m curious of there are any weird features in the dataset, like the hybrid symbol. Maybe there is other html hiding as well. Going to poke through this list to check"
-  },
-  {
-    "objectID": "workbooks/taxonomy.html#strip-white-space-and-extra-double-spaces",
-    "href": "workbooks/taxonomy.html#strip-white-space-and-extra-double-spaces",
-    "title": "Taxonomy Workbook",
-    "section": "Strip white space and extra double spaces",
-    "text": "Strip white space and extra double spaces\n\nFix hybrid symbol\n\n\nAssign taxonomic level\nHere I am giving a label if it is a species, variety, subspecies, or horticulture"
-  },
-  {
-    "objectID": "workbooks/taxonomy.html#run-gbif-taxonomy",
-    "href": "workbooks/taxonomy.html#run-gbif-taxonomy",
-    "title": "Taxonomy Workbook",
-    "section": "Run gbif taxonomy",
-    "text": "Run gbif taxonomy\nHere I’m messing with GBIF and seeing if I can run the list through their service"
-  },
-  {
-    "objectID": "workbooks/taxonomy.html#global-names-parser",
-    "href": "workbooks/taxonomy.html#global-names-parser",
-    "title": "Taxonomy Workbook",
-    "section": "Global Names Parser",
-    "text": "Global Names Parser\nhttps://parser.globalnames.org/ Check this site out. I think it handles raw, messy names super well. Even caught the html tags"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "SelecTree Data Analysis Documentation",
+    "objectID": "workbooks/common_names.html",
+    "href": "workbooks/common_names.html",
+    "title": "Common Names",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n  \n\n\n\n\nDatabase access, synonyms, and completed sunset zones\n\n\nWeek 2\n\n\n\n\n\n\n\n\n\nJan 17, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n  \n\n\n\n\nSunset Climate Zones and Taxonomy\n\n\nWeek 1\n\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n  \n\n\n\n\nGetting Started\n\n\nWeek 0\n\n\n\n\n\n\n\n\n\nJan 3, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\nNo matching items"
+    "text": "This is a script to generate common names for accepted species names on SelecTree. It uses GBIF to pull the names.\nLoad in the last run of names against GBIF\nFilter for only names that are not problematic at this moment (greater 90% of names).\nJust ensuring that we are getting leaf taxa.\nI’ve commented this out for now, but this code makes the requests to GBIF to pull vernacular names. I’ve saved the output to a csv so we don’t have to run it again. Fisher et al. (2018)\nLoad in the common names data frame again.\nI noticed poking around the table that there is a column for language. There are a lot of names not specified, but any english names appear to be repeated and labeled as such. So for this first step I’m going to filter just on english names\nNow to match the formatting of SelecTree, I’ll set all names to capital case\nNow let’s drop duplicate rows based on name\nNow I need to relate this table back to SelecTree and see what names from this list are truly new.\nLet’s start by joining the selecTree name to the common_names table\nNow lets load up the SelecTree taxon table and join treeID\nNow that we have tree_id for each common name, let’s see compare to our existing common names\nI want to bring the two tables together, so I am going to select the columns I want and prepare them to be concatenated.\nNow I’ll combine the two.\nLet’s add a url column\nwrite to csv"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This site is dedicated to sharing and documenting the work done between Matt Ritter and Kyle Nessen to improve the data quality at SelecTree."
+  },
+  {
+    "objectID": "posts/week-1/index.html",
+    "href": "posts/week-1/index.html",
+    "title": "Sunset Climate Zones and Taxonomy",
+    "section": "",
+    "text": "Matt and May like the blog format. Agreed a new post each week to document work done is a nice path forward.\nI created an account with SelecTree. May working on getting me admin access.\nSunset Zones were identified as a priority. I offered to look into scraping the data form some online source.\nMatt wants me to run all selecTree names through some taxonomic name parser, such as the Taxonomic Name Resolution Service or the GBIF Name Parser.\nI offered to export subsets of the dataset that can be handed off to undergrads to help fill out."
+  },
+  {
+    "objectID": "posts/week-1/index.html#previous-week-meeting-notes",
+    "href": "posts/week-1/index.html#previous-week-meeting-notes",
+    "title": "Sunset Climate Zones and Taxonomy",
+    "section": "",
+    "text": "Matt and May like the blog format. Agreed a new post each week to document work done is a nice path forward.\nI created an account with SelecTree. May working on getting me admin access.\nSunset Zones were identified as a priority. I offered to look into scraping the data form some online source.\nMatt wants me to run all selecTree names through some taxonomic name parser, such as the Taxonomic Name Resolution Service or the GBIF Name Parser.\nI offered to export subsets of the dataset that can be handed off to undergrads to help fill out."
+  },
+  {
+    "objectID": "posts/week-1/index.html#sunset-climate-zones",
+    "href": "posts/week-1/index.html#sunset-climate-zones",
+    "title": "Sunset Climate Zones and Taxonomy",
+    "section": "Sunset climate zones",
+    "text": "Sunset climate zones\nWhen I offered to scrape the Sunset Climate Zones, I didn’t realize that the information was only in The New Western Garden Book. That obviously complicates my scraping plans, but I have a few ideas.\n\nManually enter missing zones\nThis is the most direct way to get to the primary source for our missing trees. Fortunately, there are only 71 missing species, so I think this is the way to go. Below I list the first ten species with missing Sunset Zones as an example. I’ve also included a link to the SelecTree page.\n\n\n\nSpecies with Missing Sunset Zones (first 10)\n\n\nTree ID\nScientific Name\nSelecTree URL\n\n\n\n\n1829\nAextoxicon punctatum\nhttps://selectree.calpoly.edu/tree-detail/1829\n\n\n1831\nAristotelia chilensis\nhttps://selectree.calpoly.edu/tree-detail/1831\n\n\n1832\nAustrocedrus chilensis\nhttps://selectree.calpoly.edu/tree-detail/1832\n\n\n1860\nBeilschmiedia berteroana\nhttps://selectree.calpoly.edu/tree-detail/1860\n\n\n1833\nBeilschmiedia miersii\nhttps://selectree.calpoly.edu/tree-detail/1833\n\n\n1984\nBeilschmiedia tarairi\nhttps://selectree.calpoly.edu/tree-detail/1984\n\n\n1986\nCeratopetalum gummiferum\nhttps://selectree.calpoly.edu/tree-detail/1986\n\n\n1989\nDacrycarpus dacrydioides\nhttps://selectree.calpoly.edu/tree-detail/1989\n\n\n1990\nDacrydium cupressinum\nhttps://selectree.calpoly.edu/tree-detail/1990\n\n\n1836\nDasyphyllum diacanthoides\nhttps://selectree.calpoly.edu/tree-detail/1836\n\n\n\n\n\n\n\n\nGoogle Sheets\nI’ve prepared a Google Sheet to help with data entry. It contains all the species with missing sunset zones, as well as a column for each zone. It should be fairly straightforward to enter the information, simply check the box for each applicable zone. The “completed” column is there to indicate of that species is done.\n\n    SelecTree - Missing Sunset Climate Zones\n\n\n\n\nScrape other sites\nIf, for some reason, we want to rebuild the Sunset Zone information for this database, there are a number of sites that contain the information. We would likely need to piece together several sites to cover the whole SelecTree dataset. I’ve listed a few below.\n\nhttps://www.gardenia.net/\nhttps://calscape.org/\nhttps://pfaf.org/\nhttps://davesgarden.com/\n\nPlease note, however, that each site would represent its own coding endeavor, multiplying the work for each site added. I don’t think we should go down this path unless it’s warranted, but I wanted to make the option explicit here.\n\n\nReinvent a better wheel\nLooking into the Sunset Climate Zones has me wondering, “can we do this better?”\nFrom my understanding, the Sunset Zones take climatic characteristics relevant to plants, group them into a finite number of zones, and map them across the Western US.\nIt seems unlikely that Editors of Western Garden Book had access to millions of tree points and modern weather data when they wrote the original edition. No doubt, the book is a major accomplishment, but I wonder what could be done with a data driven approach with the information at our disposal.\nThis “better climate zones” project would no doubt take a lot of effort (maybe a master’s?), so I’m not suggesting we do this now. You have also probably already explored this idea and may be working on it now or there’s some complication I’m not aware of. Still, I think it’s worth bringing up, as such a product would make SelecTree stand out even more than it does now. We might be the only ones in the world right now who have the data to make it happen. For what it’s worth!"
+  },
+  {
+    "objectID": "posts/week-1/index.html#taxonomy",
+    "href": "posts/week-1/index.html#taxonomy",
+    "title": "Sunset Climate Zones and Taxonomy",
+    "section": "Taxonomy",
+    "text": "Taxonomy\nI took the full list of names in selectTree and did a bit of cleaning. There wasn’t a lot to do here in the end, I simply removed any double spaces (12 species in total) and fixed stray HTML tags (hybrid designation `&times`).\nWhile poking around in the data, I noticed Brugmansia ‘Charles Grimaldi’ is missing a specific epithet. I believe the correct name should be Brugmansia versicolor ‘Charles Grimaldi’. This was only one opportunistic find, however.\nMy next step was to run all the names through GBIF to see if there are any taxonomic issues with the names. Fortunately, most names seem to be in good shape.\n\n\n\nGBIF Taxonomy Results\n\n\nStatus\nTotal Count\n\n\n\n\nACCEPTED\n1805\n\n\nSYNONYM\n115\n\n\nDOUBTFUL\n6\n\n\n\n\n\n\n\nThere’s also a confidence interval that GBIF provides. Querying the lowest matches (80%) finds more examples like Brugmansia, where the epithet appears to be dropped. I copy a few examples below, but a quick look indicates there are at least 43.\n\n\n\nExample Names Missing Specific Epithet\n\n\nSelecTree Name\nSelecTree Page\n\n\n\n\nArbutus 'Marina'\nhttps://selectree.calpoly.edu/tree-detail/174\n\n\nCastanea 'Colossal'\nhttps://selectree.calpoly.edu/tree-detail/270\n\n\nCeanothus 'Ray Hartman'\nhttps://selectree.calpoly.edu/tree-detail/282\n\n\nCrataegus 'Autumn Glory'\nhttps://selectree.calpoly.edu/tree-detail/444\n\n\nFraxinus 'Fan-West'\nhttps://selectree.calpoly.edu/tree-detail/619\n\n\nLagerstroemia 'Muskogee'\nhttps://selectree.calpoly.edu/tree-detail/787\n\n\n\n\n\n\n\nThere’s more work to be done here to untangle what is going on. Ultimately, I would like to produce a list of tree IDs and updated names for the site. At a later meeting, we should talk about synonyms and whether or not they should be updated. Additionally, I can get deep into finding all synonyms for all species on GBIF. It seems like there is plenty left to collect. Perhaps more than is worth sharing."
+  },
+  {
+    "objectID": "posts/week-2/index.html",
+    "href": "posts/week-2/index.html",
+    "title": "Database access, synonyms, and completed sunset zones",
+    "section": "",
+    "text": "Matt, May, and I met ahead of our meeting with Daniel and Logan.\nMatt identified that missing sunset species likely were not in The New Western Garden Book, and therefore nothing to look up in the book or on other websites.\nMatt told me to give him an equivalent species column for him to fill out which we can draw sunset zones from.\nMay had me remove the zone columns in the Google Spreadsheet, as it would be easier to copy and paste from the SelecTree website.\nI offered to try to do a look-up with code for the missing sunset zones first before getting Caitlin involved.\nIn terms of taxonomy, Matt wants to be presented a list of scientific names that are currently not accepted by a name parsing authority. He will go through and decide if it is a true synonym or not.\nAdditionally, there is no need for full authorship names. Goal is to make it easy for people to find the tree species they are looking for.\nMeeting with Daniel and Logan was helpful. They provided their internal documentation for how the database is organized\n\nhttps://muchquak.github.io/database/tables/\n\nIdeal format to send changes to them is a series of SQL statements that will update specific rows of the database. Alternatively csv files will work.\n\nMore discussion is needed as both approaches sound messy and cumbersome.\n\nLots of discussion about how I can access the database. Ultimately we settled on a database dump, which is a local copy I can explore. Logan sent this shortly after the meeting."
+  },
+  {
+    "objectID": "posts/week-2/index.html#previous-week-meeting-notes",
+    "href": "posts/week-2/index.html#previous-week-meeting-notes",
+    "title": "Database access, synonyms, and completed sunset zones",
+    "section": "",
+    "text": "Matt, May, and I met ahead of our meeting with Daniel and Logan.\nMatt identified that missing sunset species likely were not in The New Western Garden Book, and therefore nothing to look up in the book or on other websites.\nMatt told me to give him an equivalent species column for him to fill out which we can draw sunset zones from.\nMay had me remove the zone columns in the Google Spreadsheet, as it would be easier to copy and paste from the SelecTree website.\nI offered to try to do a look-up with code for the missing sunset zones first before getting Caitlin involved.\nIn terms of taxonomy, Matt wants to be presented a list of scientific names that are currently not accepted by a name parsing authority. He will go through and decide if it is a true synonym or not.\nAdditionally, there is no need for full authorship names. Goal is to make it easy for people to find the tree species they are looking for.\nMeeting with Daniel and Logan was helpful. They provided their internal documentation for how the database is organized\n\nhttps://muchquak.github.io/database/tables/\n\nIdeal format to send changes to them is a series of SQL statements that will update specific rows of the database. Alternatively csv files will work.\n\nMore discussion is needed as both approaches sound messy and cumbersome.\n\nLots of discussion about how I can access the database. Ultimately we settled on a database dump, which is a local copy I can explore. Logan sent this shortly after the meeting."
+  },
+  {
+    "objectID": "posts/week-2/index.html#database-access",
+    "href": "posts/week-2/index.html#database-access",
+    "title": "Database access, synonyms, and completed sunset zones",
+    "section": "Database access",
+    "text": "Database access\nI’m very pleased to get access to the website database. The data is much more organized and it is far easier to find issues and incomplete information.\nFor example, last week I identified a number of taxa that were missing the specific epithet in the scientific name. In order to find them, I had to pass the names through GBIF, and filter by those that had poor scores. This is an overly complicated process that is likely error prone.\nNow, I can simply pull up the taxon table and see exactly which names are missing in the species column. Here are the first ten as an example of what the taxon table looks like:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntaxon_id\ntree_id\ngenus\nspecies\nhybrid_alt_species\nsubspecies\nvariety\ncultivar\nhybrid_x\nname_concat\nname_unformatted\nsequence\n\n\n\n\n172\n174\nArbutus\n\n\n\n\nMarina\n\nArbutus ‘Marina’\nArbutus ‘Marina’\n1\n\n\n220\n222\nBrugmansia\n\n\n\n\nCharles Grimaldi\n\nBrugmansia ‘Charles Grimaldi’\nBrugmansia ‘Charles Grimaldi’\n1\n\n\n267\n270\nCastanea\n\n\n\n\nColossal\n\nCastanea ‘Colossal’\nCastanea ‘Colossal’\n1\n\n\n279\n282\nCeanothus\n\n\n\n\nRay Hartman\n\nCeanothus ‘Ray Hartman’\nCeanothus ‘Ray Hartman’\n1\n\n\n440\n444\nCrataegus\n\n\n\n\nAutumn Glory\n\nCrataegus ‘Autumn Glory’\nCrataegus ‘Autumn Glory’\n1\n\n\n604\n619\nFraxinus\n\n\n\n\nFan-West\n\nFraxinus ‘Fan-West’\nFraxinus ‘Fan-West’\n1\n\n\n696\n711\nIlex\n\n\n\n\nNellie R. Stevens\ncultivar\nIlex &times ‘Nellie R. Stevens’\nIlex x ‘Nellie R. Stevens’\n1\n\n\n697\n712\nIlex\n\n\n\n\nSan Jose\ncultivar\nIlex &times ‘San Jose’\nIlex x ‘San Jose’\n1\n\n\n698\n713\nIlex\n\n\n\n\nWilsonii\n\nIlex ‘Wilsonii’\nIlex ‘Wilsonii’\n1\n\n\n772\n787\nLagerstroemia\n\n\n\n\nMuskogee\n\nLagerstroemia ‘Muskogee’\nLagerstroemia ‘Muskogee’\n1\n\n\n\n\n\n\nLast week, I said there was at least 43 incomplete names, but the actual number is 59. Some of those new names are synonyms, however.\nHere is a new Google Sheet with those species. This seems like a good task for Caitlin to fill out the missing info. I’ve highlighted the column that needs to be completed, but she should use additional columns as needed.\n\n    SelecTree - Missing Specific Epithets"
+  },
+  {
+    "objectID": "posts/week-2/index.html#sunset-zones",
+    "href": "posts/week-2/index.html#sunset-zones",
+    "title": "Database access, synonyms, and completed sunset zones",
+    "section": "Sunset Zones",
+    "text": "Sunset Zones\nAfter our meeting last week, Matt went through and added analogous tree species for our missing sunset zones. I took those names and looked up the zone values we have stored already.\nOnly two species had issues:\n\nUlmus chinensis is not in SelecTree. I assume Matt meant Ulmus parvifolia. Let me know if that’s not the case.\nVitex negundo is not in SelecTree (only the cultivar), and I cannot find anything online for sunset zones. This is the only missing tree for sunset zones. If you give me an alternative, I can easily fix it.\n\nI’ve generated a csv below that should be straightforward to incorporate into the production database of the website. I can go into the details in our meeting if you want, but essentially each row represents a sunset zone, with tree_id repeating if a species has multiple zones.\nThis new csv is almost 1000 rows long, so writing out SQL statements as Logan suggested is impractical. A bit of searching indicates that he should be able to load this csv into some scripting language and insert the new values easily. I could also do this, but I don’t have access to their SQL database and I’m still not an admin on the website. I think long-term, everyone would be happier if we reduce middlemen, so I would like to explore options on how I can update the database directly.\nLet me know if you’d like me to coordinate with Logan about the updated sunset zones csv.\n\n\n\n Download updated sunset zones as csv"
+  },
+  {
+    "objectID": "posts/week-2/index.html#synonyms",
+    "href": "posts/week-2/index.html#synonyms",
+    "title": "Database access, synonyms, and completed sunset zones",
+    "section": "Synonyms",
+    "text": "Synonyms\nWith the updated list of names from the database, I re-ran the species through GBIF to look for synonyms. I only ran a subset, however. Here are the conditions I used to generate the shortened list:\n\nI only ran SelecTree accepted names (where sequence = 1 in the taxon table)\nGBIF does not handle cultivars, so I excluded them from the list as they seem to share the same species\nI excluded the problematic names mentioned above\n\nThat left me with a total of 1233 species to check. Of those, 1131 or ~92% were perfect matches that GBIF agrees are accepted names.\nFor perfect matches that GBIF considers a synonym (83 total), I’ve created another Google Sheet linked below. You can see the SelecTree name as well as the scientific name GBIF considers accepted. They are hyperlinked to the GBIF page for each species. I also included an “Overrule Synonym?” column that you can check if you want to ignore GBIF’s taxonomy. Notes are optional, but the column is there.\n\n    SelecTree Synonyms\n\nThere are about 18 other species that had some difficulty matching with GBIF. I will revisit these once the names above are resolved."
+  },
+  {
+    "objectID": "posts/week-3/index.html",
+    "href": "posts/week-3/index.html",
+    "title": "Common Names From GBIF",
+    "section": "",
+    "text": "The “problematic” names I identified with no specific epithet are not necessarily errors. Matt clarified that some cultivars can have the epithet absent.\nCaitlyn will go through Google Sheets list and make corrections where necessary.\nI sent the filled out list of Sunset Zones to Logan and he said he would begin work on incorporating into the production database.\nWe discussed issues with how the names are formatted on the website. Specifically, incorrect use of italicized text.\n\nI offered to look into how to generate a more appropriate html string.\n\nI mentioned that GBIF has common names, and Matt wanted me to generate a large list of names for review."
+  },
+  {
+    "objectID": "posts/week-3/index.html#previous-week-notes",
+    "href": "posts/week-3/index.html#previous-week-notes",
+    "title": "Common Names From GBIF",
+    "section": "",
+    "text": "The “problematic” names I identified with no specific epithet are not necessarily errors. Matt clarified that some cultivars can have the epithet absent.\nCaitlyn will go through Google Sheets list and make corrections where necessary.\nI sent the filled out list of Sunset Zones to Logan and he said he would begin work on incorporating into the production database.\nWe discussed issues with how the names are formatted on the website. Specifically, incorrect use of italicized text.\n\nI offered to look into how to generate a more appropriate html string.\n\nI mentioned that GBIF has common names, and Matt wanted me to generate a large list of names for review."
+  },
+  {
+    "objectID": "posts/week-3/index.html#common-names",
+    "href": "posts/week-3/index.html#common-names",
+    "title": "Common Names From GBIF",
+    "section": "Common names",
+    "text": "Common names\nI took the list of names that were exact matches and accepted names from last week and ran them through GBIF to generate a large list of common names. I then filtered out any common names that were not in English (let me know if you want names from any language) and normalized them to match SelecTree (all capital letters). I compared this GBIF list to our existing common names for each tree and removed any direct matches. I then combined both lists and indicated if the common name is already existing in SelecTree, or if the name is new from GBIF. You can see the complete list in the Google Sheet listed below:\n\n    SelecTree - Common Names\n\nI would like to explore this list together a bit to gain a better intuition of what sorts of names you would like to include into SelecTree and those which are not appropriate.\nThe list of names is almost 10,000 rows long, so it may be beyond the scope of manual review, but perhaps there is some clever work around here. One idea is to use AI to review the names for anything that may have been missed in the first round of cleaning (e.g., EUROPEAN SILVER FIR vs EUROPEAN SILVER-FIR)."
+  },
+  {
+    "objectID": "posts/week-3/index.html#formatted-names",
+    "href": "posts/week-3/index.html#formatted-names",
+    "title": "Common Names From GBIF",
+    "section": "Formatted names",
+    "text": "Formatted names\nI wasn’t able to fully flesh out the code to fix the display of scientific names this week, but can certainly keep working on it. I feel it would be good to fully resolve the taxon table first, as I’m already feeling like there are getting to be too many loose tables floating around. I’d like to get everything clean and updated, then regenerate the formatted name column once."
   },
   {
     "objectID": "posts/week-0/index.html",
@@ -91,73 +147,52 @@
     "text": "Extra Spaces in Names\nWhen we first looked at this dataset, I noticed there was some weird things happening with the names. Specifically, extra spaces were finding their way into the names. I’ve copied a list of names that have additional spaces, which I have confirmed carries through to the website. I’m sure it’s a pretty easy fix on their end. These are all additional spaces between the genus and specific epithet.\n\n\n\nNames with Spacing Issues\n\n\nAndira inermis\nFagraea fragrans\n\n\nAreca vestiaria\nFicus dammaropsis\n\n\nButea monosperma\nFicus pseudopalma\n\n\nCallistemon brachyandra\nMalosma laurina\n\n\nCornus nutallii\nPlerandra elegantissima\n\n\nElaeis guineensis\nVitex trifolia\n\n\n\n\n\n\n\n\n\n\n\nPossible Directions\n\n\n\nSend this list to web site maintainers to fix."
   },
   {
-    "objectID": "posts/week-2/index.html",
-    "href": "posts/week-2/index.html",
-    "title": "Database access, synonyms, and completed sunset zones",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "SelecTree Data Analysis Documentation",
     "section": "",
-    "text": "Matt, May, and I met ahead of our meeting with Daniel and Logan.\nMatt identified that missing sunset species likely were not in The New Western Garden Book, and therefore nothing to look up in the book or on other websites.\nMatt told me to give him an equivalent species column for him to fill out which we can draw sunset zones from.\nMay had me remove the zone columns in the Google Spreadsheet, as it would be easier to copy and paste from the SelecTree website.\nI offered to try to do a look-up with code for the missing sunset zones first before getting Caitlin involved.\nIn terms of taxonomy, Matt wants to be presented a list of scientific names that are currently not accepted by a name parsing authority. He will go through and decide if it is a true synonym or not.\nAdditionally, there is no need for full authorship names. Goal is to make it easy for people to find the tree species they are looking for.\nMeeting with Daniel and Logan was helpful. They provided their internal documentation for how the database is organized\n\nhttps://muchquak.github.io/database/tables/\n\nIdeal format to send changes to them is a series of SQL statements that will update specific rows of the database. Alternatively csv files will work.\n\nMore discussion is needed as both approaches sound messy and cumbersome.\n\nLots of discussion about how I can access the database. Ultimately we settled on a database dump, which is a local copy I can explore. Logan sent this shortly after the meeting."
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\n\n\n\n\n\nCommon Names From GBIF\n\n\nWeek 3\n\n\n\n\n\n\n\n\nJan 31, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n\n\n\n\n\n\nDatabase access, synonyms, and completed sunset zones\n\n\nWeek 2\n\n\n\n\n\n\n\n\nJan 17, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n\n\n\n\n\n\nSunset Climate Zones and Taxonomy\n\n\nWeek 1\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\nWeek 0\n\n\n\n\n\n\n\n\nJan 3, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/week-2/index.html#previous-week-meeting-notes",
-    "href": "posts/week-2/index.html#previous-week-meeting-notes",
-    "title": "Database access, synonyms, and completed sunset zones",
-    "section": "",
-    "text": "Matt, May, and I met ahead of our meeting with Daniel and Logan.\nMatt identified that missing sunset species likely were not in The New Western Garden Book, and therefore nothing to look up in the book or on other websites.\nMatt told me to give him an equivalent species column for him to fill out which we can draw sunset zones from.\nMay had me remove the zone columns in the Google Spreadsheet, as it would be easier to copy and paste from the SelecTree website.\nI offered to try to do a look-up with code for the missing sunset zones first before getting Caitlin involved.\nIn terms of taxonomy, Matt wants to be presented a list of scientific names that are currently not accepted by a name parsing authority. He will go through and decide if it is a true synonym or not.\nAdditionally, there is no need for full authorship names. Goal is to make it easy for people to find the tree species they are looking for.\nMeeting with Daniel and Logan was helpful. They provided their internal documentation for how the database is organized\n\nhttps://muchquak.github.io/database/tables/\n\nIdeal format to send changes to them is a series of SQL statements that will update specific rows of the database. Alternatively csv files will work.\n\nMore discussion is needed as both approaches sound messy and cumbersome.\n\nLots of discussion about how I can access the database. Ultimately we settled on a database dump, which is a local copy I can explore. Logan sent this shortly after the meeting."
+    "objectID": "workbooks/taxonomy.html#create-condensened-dataframe",
+    "href": "workbooks/taxonomy.html#create-condensened-dataframe",
+    "title": "Taxonomy Workbook",
+    "section": "Create condensened dataframe",
+    "text": "Create condensened dataframe\nI want to build my own taxonomy table, so I’m going to pull just tree ID and displayed scientific name. To start I’ll make a copy of the scientific name column which I can start to clean"
   },
   {
-    "objectID": "posts/week-2/index.html#database-access",
-    "href": "posts/week-2/index.html#database-access",
-    "title": "Database access, synonyms, and completed sunset zones",
-    "section": "Database access",
-    "text": "Database access\nI’m very pleased to get access to the website database. The data is much more organized and it is far easier to find issues and incomplete information.\nFor example, last week I identified a number of taxa that were missing the specific epithet in the scientific name. In order to find them, I had to pass the names through GBIF, and filter by those that had poor scores. This is an overly complicated process that is likely error prone.\nNow, I can simply pull up the taxon table and see exactly which names are missing in the species column. Here are the first ten as an example of what the taxon table looks like:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntaxon_id\ntree_id\ngenus\nspecies\nhybrid_alt_species\nsubspecies\nvariety\ncultivar\nhybrid_x\nname_concat\nname_unformatted\nsequence\n\n\n\n\n172\n174\nArbutus\n\n\n\n\nMarina\n\nArbutus ‘Marina’\nArbutus ‘Marina’\n1\n\n\n220\n222\nBrugmansia\n\n\n\n\nCharles Grimaldi\n\nBrugmansia ‘Charles Grimaldi’\nBrugmansia ‘Charles Grimaldi’\n1\n\n\n267\n270\nCastanea\n\n\n\n\nColossal\n\nCastanea ‘Colossal’\nCastanea ‘Colossal’\n1\n\n\n279\n282\nCeanothus\n\n\n\n\nRay Hartman\n\nCeanothus ‘Ray Hartman’\nCeanothus ‘Ray Hartman’\n1\n\n\n440\n444\nCrataegus\n\n\n\n\nAutumn Glory\n\nCrataegus ‘Autumn Glory’\nCrataegus ‘Autumn Glory’\n1\n\n\n604\n619\nFraxinus\n\n\n\n\nFan-West\n\nFraxinus ‘Fan-West’\nFraxinus ‘Fan-West’\n1\n\n\n696\n711\nIlex\n\n\n\n\nNellie R. Stevens\ncultivar\nIlex &times ‘Nellie R. Stevens’\nIlex x ‘Nellie R. Stevens’\n1\n\n\n697\n712\nIlex\n\n\n\n\nSan Jose\ncultivar\nIlex &times ‘San Jose’\nIlex x ‘San Jose’\n1\n\n\n698\n713\nIlex\n\n\n\n\nWilsonii\n\nIlex ‘Wilsonii’\nIlex ‘Wilsonii’\n1\n\n\n772\n787\nLagerstroemia\n\n\n\n\nMuskogee\n\nLagerstroemia ‘Muskogee’\nLagerstroemia ‘Muskogee’\n1\n\n\n\n\n\n\nLast week, I said there was at least 43 incomplete names, but the actual number is 59. Some of those new names are synonyms, however.\nHere is a new Google Sheet with those species. This seems like a good task for Caitlin to fill out the missing info. I’ve highlighted the column that needs to be completed, but she should use additional columns as needed.\n\n    SelecTree - Missing Specific Epithets"
+    "objectID": "workbooks/taxonomy.html#clean-scientific-names",
+    "href": "workbooks/taxonomy.html#clean-scientific-names",
+    "title": "Taxonomy Workbook",
+    "section": "Clean scientific names",
+    "text": "Clean scientific names\n\n&times = × = hybrid\n’ ’ = horticultural variety\nBrugmansia ‘Charles Grimaldi’ (222) is missing specific epithet"
   },
   {
-    "objectID": "posts/week-2/index.html#sunset-zones",
-    "href": "posts/week-2/index.html#sunset-zones",
-    "title": "Database access, synonyms, and completed sunset zones",
-    "section": "Sunset Zones",
-    "text": "Sunset Zones\nAfter our meeting last week, Matt went through and added analogous tree species for our missing sunset zones. I took those names and looked up the zone values we have stored already.\nOnly two species had issues:\n\nUlmus chinensis is not in SelecTree. I assume Matt meant Ulmus parvifolia. Let me know if that’s not the case.\nVitex negundo is not in SelecTree (only the cultivar), and I cannot find anything online for sunset zones. This is the only missing tree for sunset zones. If you give me an alternative, I can easily fix it.\n\nI’ve generated a csv below that should be straightforward to incorporate into the production database of the website. I can go into the details in our meeting if you want, but essentially each row represents a sunset zone, with tree_id repeating if a species has multiple zones.\nThis new csv is almost 1000 rows long, so writing out SQL statements as Logan suggested is impractical. A bit of searching indicates that he should be able to load this csv into some scripting language and insert the new values easily. I could also do this, but I don’t have access to their SQL database and I’m still not an admin on the website. I think long-term, everyone would be happier if we reduce middlemen, so I would like to explore options on how I can update the database directly.\nLet me know if you’d like me to coordinate with Logan about the updated sunset zones csv.\n\n\n\n Download updated sunset zones as csv"
+    "objectID": "workbooks/taxonomy.html#count-all-unique-words",
+    "href": "workbooks/taxonomy.html#count-all-unique-words",
+    "title": "Taxonomy Workbook",
+    "section": "Count all unique words",
+    "text": "Count all unique words\nI’m curious of there are any weird features in the dataset, like the hybrid symbol. Maybe there is other html hiding as well. Going to poke through this list to check"
   },
   {
-    "objectID": "posts/week-2/index.html#synonyms",
-    "href": "posts/week-2/index.html#synonyms",
-    "title": "Database access, synonyms, and completed sunset zones",
-    "section": "Synonyms",
-    "text": "Synonyms\nWith the updated list of names from the database, I re-ran the species through GBIF to look for synonyms. I only ran a subset, however. Here are the conditions I used to generate the shortened list:\n\nI only ran SelecTree accepted names (where sequence = 1 in the taxon table)\nGBIF does not handle cultivars, so I excluded them from the list as they seem to share the same species\nI excluded the problematic names mentioned above\n\nThat left me with a total of 1233 species to check. Of those, 1131 or ~92% were perfect matches that GBIF agrees are accepted names.\nFor perfect matches that GBIF considers a synonym (83 total), I’ve created another Google Sheet linked below. You can see the SelecTree name as well as the scientific name GBIF considers accepted. They are hyperlinked to the GBIF page for each species. I also included an “Overrule Synonym?” column that you can check if you want to ignore GBIF’s taxonomy. Notes are optional, but the column is there.\n\n    SelecTree Synonyms\n\nThere are about 18 other species that had some difficulty matching with GBIF. I will revisit these once the names above are resolved."
+    "objectID": "workbooks/taxonomy.html#strip-white-space-and-extra-double-spaces",
+    "href": "workbooks/taxonomy.html#strip-white-space-and-extra-double-spaces",
+    "title": "Taxonomy Workbook",
+    "section": "Strip white space and extra double spaces",
+    "text": "Strip white space and extra double spaces\n\nFix hybrid symbol\n\n\nAssign taxonomic level\nHere I am giving a label if it is a species, variety, subspecies, or horticulture"
   },
   {
-    "objectID": "posts/week-1/index.html",
-    "href": "posts/week-1/index.html",
-    "title": "Sunset Climate Zones and Taxonomy",
-    "section": "",
-    "text": "Matt and May like the blog format. Agreed a new post each week to document work done is a nice path forward.\nI created an account with SelecTree. May working on getting me admin access.\nSunset Zones were identified as a priority. I offered to look into scraping the data form some online source.\nMatt wants me to run all selecTree names through some taxonomic name parser, such as the Taxonomic Name Resolution Service or the GBIF Name Parser.\nI offered to export subsets of the dataset that can be handed off to undergrads to help fill out."
+    "objectID": "workbooks/taxonomy.html#run-gbif-taxonomy",
+    "href": "workbooks/taxonomy.html#run-gbif-taxonomy",
+    "title": "Taxonomy Workbook",
+    "section": "Run gbif taxonomy",
+    "text": "Run gbif taxonomy\nHere I’m messing with GBIF and seeing if I can run the list through their service"
   },
   {
-    "objectID": "posts/week-1/index.html#previous-week-meeting-notes",
-    "href": "posts/week-1/index.html#previous-week-meeting-notes",
-    "title": "Sunset Climate Zones and Taxonomy",
-    "section": "",
-    "text": "Matt and May like the blog format. Agreed a new post each week to document work done is a nice path forward.\nI created an account with SelecTree. May working on getting me admin access.\nSunset Zones were identified as a priority. I offered to look into scraping the data form some online source.\nMatt wants me to run all selecTree names through some taxonomic name parser, such as the Taxonomic Name Resolution Service or the GBIF Name Parser.\nI offered to export subsets of the dataset that can be handed off to undergrads to help fill out."
-  },
-  {
-    "objectID": "posts/week-1/index.html#sunset-climate-zones",
-    "href": "posts/week-1/index.html#sunset-climate-zones",
-    "title": "Sunset Climate Zones and Taxonomy",
-    "section": "Sunset climate zones",
-    "text": "Sunset climate zones\nWhen I offered to scrape the Sunset Climate Zones, I didn’t realize that the information was only in The New Western Garden Book. That obviously complicates my scraping plans, but I have a few ideas.\n\nManually enter missing zones\nThis is the most direct way to get to the primary source for our missing trees. Fortunately, there are only 71 missing species, so I think this is the way to go. Below I list the first ten species with missing Sunset Zones as an example. I’ve also included a link to the SelecTree page.\n\n\n\nSpecies with Missing Sunset Zones (first 10)\n\n\nTree ID\nScientific Name\nSelecTree URL\n\n\n\n\n1829\nAextoxicon punctatum\nhttps://selectree.calpoly.edu/tree-detail/1829\n\n\n1831\nAristotelia chilensis\nhttps://selectree.calpoly.edu/tree-detail/1831\n\n\n1832\nAustrocedrus chilensis\nhttps://selectree.calpoly.edu/tree-detail/1832\n\n\n1860\nBeilschmiedia berteroana\nhttps://selectree.calpoly.edu/tree-detail/1860\n\n\n1833\nBeilschmiedia miersii\nhttps://selectree.calpoly.edu/tree-detail/1833\n\n\n1984\nBeilschmiedia tarairi\nhttps://selectree.calpoly.edu/tree-detail/1984\n\n\n1986\nCeratopetalum gummiferum\nhttps://selectree.calpoly.edu/tree-detail/1986\n\n\n1989\nDacrycarpus dacrydioides\nhttps://selectree.calpoly.edu/tree-detail/1989\n\n\n1990\nDacrydium cupressinum\nhttps://selectree.calpoly.edu/tree-detail/1990\n\n\n1836\nDasyphyllum diacanthoides\nhttps://selectree.calpoly.edu/tree-detail/1836\n\n\n\n\n\n\n\n\nGoogle Sheets\nI’ve prepared a Google Sheet to help with data entry. It contains all the species with missing sunset zones, as well as a column for each zone. It should be fairly straightforward to enter the information, simply check the box for each applicable zone. The “completed” column is there to indicate of that species is done.\n\n    SelecTree - Missing Sunset Climate Zones\n\n\n\n\nScrape other sites\nIf, for some reason, we want to rebuild the Sunset Zone information for this database, there are a number of sites that contain the information. We would likely need to piece together several sites to cover the whole SelecTree dataset. I’ve listed a few below.\n\nhttps://www.gardenia.net/\nhttps://calscape.org/\nhttps://pfaf.org/\nhttps://davesgarden.com/\n\nPlease note, however, that each site would represent its own coding endeavor, multiplying the work for each site added. I don’t think we should go down this path unless it’s warranted, but I wanted to make the option explicit here.\n\n\nReinvent a better wheel\nLooking into the Sunset Climate Zones has me wondering, “can we do this better?”\nFrom my understanding, the Sunset Zones take climatic characteristics relevant to plants, group them into a finite number of zones, and map them across the Western US.\nIt seems unlikely that Editors of Western Garden Book had access to millions of tree points and modern weather data when they wrote the original edition. No doubt, the book is a major accomplishment, but I wonder what could be done with a data driven approach with the information at our disposal.\nThis “better climate zones” project would no doubt take a lot of effort (maybe a master’s?), so I’m not suggesting we do this now. You have also probably already explored this idea and may be working on it now or there’s some complication I’m not aware of. Still, I think it’s worth bringing up, as such a product would make SelecTree stand out even more than it does now. We might be the only ones in the world right now who have the data to make it happen. For what it’s worth!"
-  },
-  {
-    "objectID": "posts/week-1/index.html#taxonomy",
-    "href": "posts/week-1/index.html#taxonomy",
-    "title": "Sunset Climate Zones and Taxonomy",
-    "section": "Taxonomy",
-    "text": "Taxonomy\nI took the full list of names in selectTree and did a bit of cleaning. There wasn’t a lot to do here in the end, I simply removed any double spaces (12 species in total) and fixed stray HTML tags (hybrid designation `&times`).\nWhile poking around in the data, I noticed Brugmansia ‘Charles Grimaldi’ is missing a specific epithet. I believe the correct name should be Brugmansia versicolor ‘Charles Grimaldi’. This was only one opportunistic find, however.\nMy next step was to run all the names through GBIF to see if there are any taxonomic issues with the names. Fortunately, most names seem to be in good shape.\n\n\n\nGBIF Taxonomy Results\n\n\nStatus\nTotal Count\n\n\n\n\nACCEPTED\n1805\n\n\nSYNONYM\n115\n\n\nDOUBTFUL\n6\n\n\n\n\n\n\n\nThere’s also a confidence interval that GBIF provides. Querying the lowest matches (80%) finds more examples like Brugmansia, where the epithet appears to be dropped. I copy a few examples below, but a quick look indicates there are at least 43.\n\n\n\nExample Names Missing Specific Epithet\n\n\nSelecTree Name\nSelecTree Page\n\n\n\n\nArbutus 'Marina'\nhttps://selectree.calpoly.edu/tree-detail/174\n\n\nCastanea 'Colossal'\nhttps://selectree.calpoly.edu/tree-detail/270\n\n\nCeanothus 'Ray Hartman'\nhttps://selectree.calpoly.edu/tree-detail/282\n\n\nCrataegus 'Autumn Glory'\nhttps://selectree.calpoly.edu/tree-detail/444\n\n\nFraxinus 'Fan-West'\nhttps://selectree.calpoly.edu/tree-detail/619\n\n\nLagerstroemia 'Muskogee'\nhttps://selectree.calpoly.edu/tree-detail/787\n\n\n\n\n\n\n\nThere’s more work to be done here to untangle what is going on. Ultimately, I would like to produce a list of tree IDs and updated names for the site. At a later meeting, we should talk about synonyms and whether or not they should be updated. Additionally, I can get deep into finding all synonyms for all species on GBIF. It seems like there is plenty left to collect. Perhaps more than is worth sharing."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This site is dedicated to sharing and documenting the work done between Matt Ritter and Kyle Nessen to improve the data quality at SelecTree."
+    "objectID": "workbooks/taxonomy.html#global-names-parser",
+    "href": "workbooks/taxonomy.html#global-names-parser",
+    "title": "Taxonomy Workbook",
+    "section": "Global Names Parser",
+    "text": "Global Names Parser\nhttps://parser.globalnames.org/ Check this site out. I think it handles raw, messy names super well. Even caught the html tags"
   }
 ]

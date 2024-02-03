@@ -1,0 +1,49 @@
+---
+title: "Common Names From GBIF"
+subtitle: "Week 3"
+author: "Kyle Nessen"
+date: "2024-01-31"
+toc: true
+categories: []
+format: 
+   html:
+     df-print: kable
+execute:
+  echo: false
+---
+
+## Previous week notes
+
+-   The "problematic" names I identified with no specific epithet are not necessarily errors. Matt clarified that some cultivars can have the epithet absent.
+-   Caitlyn will go through Google Sheets list and make corrections where necessary.
+-   I sent the filled out list of Sunset Zones to Logan and he said he would begin work on incorporating into the production database.
+-   We discussed issues with how the names are formatted on the website. Specifically, incorrect use of italicized text.
+    -   I offered to look into how to generate a more appropriate html string.
+-   I mentioned that GBIF has common names, and Matt wanted me to generate a large list of names for review.
+
+## Common names
+
+I took the list of names that were exact matches and accepted names from last week and ran them through GBIF to generate a large list of common names. I then filtered out any common names that were not in English (let me know if you want names from any language) and normalized them to match SelecTree (all capital letters). I compared this GBIF list to our existing common names for each tree and removed any direct matches. I then combined both lists and indicated if the common name is already existing in SelecTree, or if the name is new from GBIF. You can see the complete list in the Google Sheet listed below:
+
+```{=html}
+<div style="text-align: center;">
+    <a href="https://docs.google.com/spreadsheets/d/1wSQg7Eo9C5NOG115fVlIl-t-bxrNaU4OtrITczTAEEE/edit?usp=sharing" target="_blank" style="background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 20px 40px; /* Size of the button */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px; /* Font size */
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;">SelecTree - Common Names</a>
+</div>
+```
+I would like to explore this list together a bit to gain a better intuition of what sorts of names you would like to include into SelecTree and those which are not appropriate.
+
+The list of names is almost 10,000 rows long, so it may be beyond the scope of manual review, but perhaps there is some clever work around here. One idea is to use AI to review the names for anything that may have been missed in the first round of cleaning (e.g., EUROPEAN SILVER FIR vs EUROPEAN SILVER-FIR).
+
+## Formatted names
+
+I wasn't able to fully flesh out the code to fix the display of scientific names this week, but can certainly keep working on it. I feel it would be good to fully resolve the `taxon` table first, as I'm already feeling like there are getting to be too many loose tables floating around. I'd like to get everything clean and updated, then regenerate the formatted name column once.

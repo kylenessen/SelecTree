@@ -110,8 +110,8 @@ matt_zones <- matt_zones %>%
 # Manually add Osmanthus × fortunei
 matt_zones$tree_id.y[23] <- 977
 
-# TODO add value for Vitex negundo 'Heterophylla'
-#matt_zones$tree_id.y[72] <- 
+# add value for Vitex negundo 'Heterophylla'
+matt_zones$tree_id.y[72] <- 1464
 
 matt_zones <- matt_zones %>%
   select(tree_id.x, tree_id.y) %>%

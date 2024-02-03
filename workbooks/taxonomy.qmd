@@ -32,12 +32,14 @@ df <- df %>% filter(species != "") %>% # filter out the problematic species we a
       filter(cultivar == "") # GBIF doesn't handle cultivars, so remove from query
 ```
 
+```{r}
+df[df$tree_id == 1739, ]
+
+```
 
 ## Run gbif taxonomy
 
 Here I'm messing with GBIF and seeing if I can run the list through their service
-
-
 
 ```{r}
 names <- df %>%
@@ -49,6 +51,7 @@ gbif <- map_df(names, ~name_backbone(., strict = TRUE))
 ```
 
 ## Synonyms
+
 ```{r}
 syns <- gbif %>% 
   filter(status == "SYNONYM" & matchType == "EXACT") %>%
@@ -72,8 +75,6 @@ syns <- gbif %>%
 ```{r}
 
 ```
-
-
 
 ## Scratch
 
@@ -102,5 +103,3 @@ no_syns <- problem_spp %>% filter(status != "SYNONYM" | is.na(status))
 ```{r}
 syns <- gbif %>% filter(status == "SYNONYM" & matchType == "EXACT")
 ```
-
-

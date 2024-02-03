@@ -1,0 +1,176 @@
+---
+title: "Common Names"
+author: "Kyle Nessen"
+date: "2024-01-128"
+toc: true
+categories: []
+format: 
+   html:
+     df-print: kable
+execute:
+  echo: false
+  freeze: true
+  eval: false
+  include: false
+bibliography: references.bib
+---
+
+This is a script to generate common names for accepted species names on SelecTree. It uses GBIF to pull the names.
+
+Load in the last run of names against GBIF
+
+```{r}
+#| warning: false
+library(tidyverse)
+library(readr)
+df <- read_csv("/Users/kylenessen/Documents/Code/SelecTree/posts/week-2/gbif_20240123.csv")
+df
+```
+
+Filter for only names that are not problematic at this moment (greater 90% of names).
+
+```{r}
+df <- df %>%
+  filter(status == "ACCEPTED" & matchType == "EXACT")
+df
+```
+
+Just ensuring that we are getting leaf taxa.
+
+```{r}
+df %>%
+  distinct(rank)
+```
+
+I've commented this out for now, but this code makes the requests to GBIF to pull vernacular names. I've saved the output to a csv so we don't have to run it again. @fisher2018
+
+```{r}
+#library(tidyverse)
+#library(rgbif)
+
+# Assuming 'df' is your data frame and 'usageKey' is the column with the keys
+#keys <- df$usageKey
+
+# Use map to iterate over the keys and apply name_usage function, storing results
+#results <- map(keys, ~tryCatch(rgbif::name_usage(key = .x, data = "vernacularNames"), error = function(e) NULL))
+
+# Now extract the 'data' part of each list item if it exists, otherwise create an empty tibble
+#data_frames <- map(results, ~if (is.list(.x) && "data" %in% names(.x)) .x$data else tibble())
+
+# Combine all the data frames into one
+#common_names <- bind_rows(data_frames)
+
+#write_csv(common_names,"common_names_20240130.csv")
+```
+
+Load in the common names data frame again.
+
+```{r}
+library(readr)
+common_names <- read_csv("/Users/kylenessen/Documents/Code/SelecTree/posts/week-3/common_names_20240130.csv")
+common_names
+```
+
+I noticed poking around the table that there is a column for language. There are a lot of names not specified, but any english names appear to be repeated and labeled as such. So for this first step I'm going to filter just on english names
+
+```{r}
+common_names <- common_names %>%
+  filter(language == "eng")
+common_names
+```
+
+Now to match the formatting of SelecTree, I'll set all names to capital case
+
+```{r}
+common_names <- common_names %>%
+  mutate(vernacularName = toupper(vernacularName))
+common_names
+```
+
+Now let's drop duplicate rows based on name
+
+```{r}
+common_names <- common_names %>%
+  distinct(taxonKey, vernacularName, .keep_all = TRUE)
+common_names
+```
+
+Now I need to relate this table back to SelecTree and see what names from this list are truly new.
+
+Let's start by joining the selecTree name to the common_names table
+
+```{r}
+common_names <- common_names %>%
+  left_join(df, by = c("taxonKey" = "usageKey")) %>%
+  select(taxonKey, vernacularName, source, verbatim_name)
+common_names
+```
+
+Now lets load up the SelecTree taxon table and join treeID
+
+```{r}
+library(RMySQL)
+con <- dbConnect(RMySQL::MySQL(), dbname = "selectree", host = "localhost", 
+                 port = 3306, user = "rstudio", password = "rstudio321")
+taxon <- dbReadTable(con, "taxon")
+common_names <- common_names %>%
+  left_join(taxon, by = c("verbatim_name" = "name_unformatted"),relationship
+  = "many-to-many")%>%
+  select(taxonKey,vernacularName,source,taxon_id,tree_id,verbatim_name)
+common_names
+```
+
+Now that we have tree_id for each common name, let's see compare to our existing common names
+
+```{r}
+st_common <- dbReadTable(con, "common")
+st_common
+```
+
+I want to bring the two tables together, so I am going to select the columns I want and prepare them to be concatenated.
+
+```{r}
+common_names <- common_names %>%
+  anti_join(st_common, by = c("vernacularName" = "common", "tree_id")) %>%
+  distinct(vernacularName, .keep_all = TRUE) %>%
+  select(verbatim_name,tree_id,vernacularName) %>%
+  mutate(status = "New") %>%
+  rename(scientific_name = verbatim_name,
+         common_name = vernacularName)
+
+common_names
+```
+
+```{r}
+st_common <- st_common %>%
+  left_join(taxon, by = "tree_id") %>%
+  select(tree_id,common,name_unformatted) %>%
+  mutate(status = "Existing") %>%
+  rename(scientific_name = name_unformatted,
+         common_name = common)
+st_common
+```
+
+Now I'll combine the two.
+
+```{r}
+common_names_combined <- bind_rows(common_names, st_common)
+common_names_combined
+
+```
+
+Let's add a url column
+
+```{r}
+common_names_combined <- common_names_combined %>%
+  mutate( selectree_url = paste0("https://selectree.calpoly.edu/tree-detail/",tree_id))
+common_names_combined
+```
+
+write to csv
+
+```{r}
+#write_csv(common_names_combined,"common_names_export.csv")
+```
+
+## References

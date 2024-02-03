@@ -1,0 +1,15 @@
+{
+  "hash": "6c9f4b0c5edc9ed64f0f6ff28b5dd477",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Common Names\"\nauthor: \"Kyle Nessen\"\ndate: \"2024-01-128\"\ntoc: true\ncategories: []\nformat: \n   html:\n     df-print: kable\nexecute:\n  echo: false\n  freeze: true\n  eval: false\n  include: false\nbibliography: references.bib\n---\n\n\nThis is a script to generate common names for accepted species names on SelecTree. It uses GBIF to pull the names.\n\nLoad in the last run of names against GBIF\n\n\n\n\n\nFilter for only names that are not problematic at this moment (greater 90% of names).\n\n\n\n\n\nJust ensuring that we are getting leaf taxa.\n\n\n\n\n\nI've commented this out for now, but this code makes the requests to GBIF to pull vernacular names. I've saved the output to a csv so we don't have to run it again. @fisher2018\n\n\n\n\n\nLoad in the common names data frame again.\n\n\n\n\n\nI noticed poking around the table that there is a column for language. There are a lot of names not specified, but any english names appear to be repeated and labeled as such. So for this first step I'm going to filter just on english names\n\n\n\n\n\nNow to match the formatting of SelecTree, I'll set all names to capital case\n\n\n\n\n\nNow let's drop duplicate rows based on name\n\n\n\n\n\nNow I need to relate this table back to SelecTree and see what names from this list are truly new.\n\nLet's start by joining the selecTree name to the common_names table\n\n\n\n\n\nNow lets load up the SelecTree taxon table and join treeID\n\n\n\n\n\nNow that we have tree_id for each common name, let's see compare to our existing common names\n\n\n\n\n\nI want to bring the two tables together, so I am going to select the columns I want and prepare them to be concatenated.\n\n\n\n\n\n\n\nNow I'll combine the two.\n\n\n\n\n\nLet's add a url column\n\n\n\n\n\nwrite to csv\n\n\n\n\n\n## References\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
