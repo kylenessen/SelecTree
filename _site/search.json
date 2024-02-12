@@ -77,6 +77,41 @@
     "text": "Synonyms\nWith the updated list of names from the database, I re-ran the species through GBIF to look for synonyms. I only ran a subset, however. Here are the conditions I used to generate the shortened list:\n\nI only ran SelecTree accepted names (where sequence = 1 in the taxon table)\nGBIF does not handle cultivars, so I excluded them from the list as they seem to share the same species\nI excluded the problematic names mentioned above\n\nThat left me with a total of 1233 species to check. Of those, 1131 or ~92% were perfect matches that GBIF agrees are accepted names.\nFor perfect matches that GBIF considers a synonym (83 total), I’ve created another Google Sheet linked below. You can see the SelecTree name as well as the scientific name GBIF considers accepted. They are hyperlinked to the GBIF page for each species. I also included an “Overrule Synonym?” column that you can check if you want to ignore GBIF’s taxonomy. Notes are optional, but the column is there.\n\n    SelecTree Synonyms\n\nThere are about 18 other species that had some difficulty matching with GBIF. I will revisit these once the names above are resolved."
   },
   {
+    "objectID": "posts/week-4/index.html",
+    "href": "posts/week-4/index.html",
+    "title": "Common Names Continued, Embeddings",
+    "section": "",
+    "text": "Matt was happy to include as many common names as possible.\nI said I would go through and do some more clean up before shipping a completed list to Logan.\nMatt wanted me to keep in mind the project to create our own name parser for urban trees."
+  },
+  {
+    "objectID": "posts/week-4/index.html#previous-week-notes",
+    "href": "posts/week-4/index.html#previous-week-notes",
+    "title": "Common Names Continued, Embeddings",
+    "section": "",
+    "text": "Matt was happy to include as many common names as possible.\nI said I would go through and do some more clean up before shipping a completed list to Logan.\nMatt wanted me to keep in mind the project to create our own name parser for urban trees."
+  },
+  {
+    "objectID": "posts/week-4/index.html#clean-up-notes",
+    "href": "posts/week-4/index.html#clean-up-notes",
+    "title": "Common Names Continued, Embeddings",
+    "section": "Clean up notes",
+    "text": "Clean up notes\nLast week I presented 9,988 common names for all SelecTree species. This includes existing and new names from GBIF. However, a quick inspection indicated that a lot of those names are false duplicates. For example WHITE FIR and WHITE-FIR may look different to the computer, but are actually essentially duplicates of the same name. For the dashed names, I reviewed about 300 names before making the call to do a find a replace on the whole dataset. This dropped the total names by about ~3,000 alone.\nThere were also some other anomalies from GBIF, including multiple names separated by a comma on the same line. I dealt with these as well.\nSome of the existing common names had a mix of upper and lower case. I’ve fixed that in this iteration so all names are now upper case.\nIn the end, this brought the total number of names (both existing and new) down to 6,518. Much better!"
+  },
+  {
+    "objectID": "posts/week-4/index.html#embeddings",
+    "href": "posts/week-4/index.html#embeddings",
+    "title": "Common Names Continued, Embeddings",
+    "section": "Embeddings",
+    "text": "Embeddings\nNot content to leave it there, I used AI to help surface additional duplicate names.\nI did this by using word embedding to essentially translate the common name to a numerical vector. This allows me to calculate the similarity to other common names as a single score between 0 (no similarity) and 1 (identical).\nIt’s important to note that this is a semantic similarity, which goes deeper than surface level comparisons. For example, DUTCH ELM and HOLLAND ELM have a similarity score of 0.89. While PUNK TREE and MELALEUCA have a similarity score of 0.21.\nHere’s a random sample of 25 common names and their most similar pair.\n\n\n\n\n\n\n\n\n\n\n\n\nScientific Name\nCommon Name\nMost Similar Name\nSimilarity Score\n\n\n\n\nAgathis robusta\nAUSTRALIAN KAURI\nSMOOTHBARK KAURI\n0.5556556\n\n\nCotoneaster salicifolius\nWILLOW LEAVED COTONEASTER\nWILLOW LEAF COTONEASTER\n0.9353113\n\n\nMalus sylvestris\nEUROPEAN CRAB APPLE\nEUROPEAN WILD APPLE\n0.7778924\n\n\nSyzygium cumini\nPORTUGUESE PLUM\nDUBAT\n0.2633872\n\n\nCorymbia citriodora\nLEMON SCENT GUM\nLEMON SCENTED GUM\n0.9833951\n\n\nAmelanchier canadensis\nEASTERN SERVICEBERRY\nCANADIAN SERVICEBERRY\n0.6838179\n\n\nMoringa oleifera\nDRUMSTICKTREE\nHORSERADISHTREE\n0.4749083\n\n\nCornus florida\nFLORIDA DOGWOOD\nWHITE CORNEL\n0.3870133\n\n\nCasuarina equisetifolia\nSHE OAK\nPOLYNESIAN IRONWOOD\n0.4099975\n\n\nQuercus turbinella\nSONORAN SCRUB OAK\nDESERT SCRUB OAK\n0.7632381\n\n\nAleurites moluccanus\nCANDLEBERRY\nLUMBANG\n0.2996362\n\n\nFicus aurea\nFLORIDA STRANGLER FIG\nGOLDEN FIG\n0.4919955\n\n\nAgonis flexuosa\nWESTERN AUSTRALIAN MYRTLE\nWILLOW PEPPERMINT\n0.4268756\n\n\nThespesia populnea\nQUILULU\nAMAE\n0.2472749\n\n\nCordia sebestena\nBROADLEAF\nKELAU\n0.2150219\n\n\nAraucaria cunninghamii\nRICHMOND RIVER PINE\nHOOP PINE\n0.5784520\n\n\nMorinda citrifolia\nNGEL\nNOPURNEN\n0.2878066\n\n\nCasuarina equisetifolia\nWHISTLINGTREE\nWEHKU\n0.2106916\n\n\nLibidibia ferrea\nMORADA\nLEOPARD TREE\n0.2191152\n\n\nPhillyrea latifolia\nGREEN OLIVE TREE\nMOCK PRIVET\n0.3954378\n\n\nSyzygium malaccense\nOTAHEITE APPLE\nFAARIYAP\n0.3210089\n\n\nPandanus tectorius\nTAHITIAN SCREWPINE\nKAFU\n0.2487246\n\n\nLagunaria patersonia\nWHITEWOOD\nPRIMROSE TREE\n0.3828147\n\n\nEucalyptus bridgesiana\nAPPLEBOX\nSWAMP APPLE\n0.5530319\n\n\nCasuarina equisetifolia\nBEACH CASUARINA\nHORSETAILTREE\n0.3071727\n\n\n\n\n\n\nI’ve made another Google Sheet with the full list of comparison, with the most similar (and most likely to be a duplicate) at the top. I’ve also added check boxes for names that should be removed. If there’s no check box, I’ll assume it’s good to keep. If you want me to keep everything, great. Or we can review till we get tired of it. Just let me know how to proceed.\n\n    SelecTree - Similar Common Names\n\n\nOther uses for embedding\nThis may be an over-engineered solution for a list of common names, but I think it was a useful exercise. There are genuine duplicates in that list that would have been otherwise difficult to catch.\nAdditionally, embeddings can be used to do robust fuzzy matching on names inputted by users. This could be useful for our name parser service, and I don’t think any of the other common services (like TNRS) are using this particular technique. I believe they are using older natural language processing methods."
+  },
+  {
+    "objectID": "posts/week-4/index.html#synonyms",
+    "href": "posts/week-4/index.html#synonyms",
+    "title": "Common Names Continued, Embeddings",
+    "section": "Synonyms",
+    "text": "Synonyms\nNext week I’ll repeat the work I did for common names but for taxonomic synonyms. Please let me know if there’s another area I should focus."
+  },
+  {
     "objectID": "posts/week-3/index.html",
     "href": "posts/week-3/index.html",
     "title": "Common Names From GBIF",
@@ -151,7 +186,7 @@
     "href": "index.html",
     "title": "SelecTree Data Analysis Documentation",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\n\n\n\n\n\nCommon Names From GBIF\n\n\nWeek 3\n\n\n\n\n\n\n\n\nJan 31, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n\n\n\n\n\n\nDatabase access, synonyms, and completed sunset zones\n\n\nWeek 2\n\n\n\n\n\n\n\n\nJan 17, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n\n\n\n\n\n\nSunset Climate Zones and Taxonomy\n\n\nWeek 1\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\nWeek 0\n\n\n\n\n\n\n\n\nJan 3, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\n\n\n\n\n\nCommon Names Continued, Embeddings\n\n\nWeek 4\n\n\n\n\n\n\n\n\nFeb 7, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n\n\n\n\n\n\nCommon Names From GBIF\n\n\nWeek 3\n\n\n\n\n\n\n\n\nJan 31, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n\n\n\n\n\n\nDatabase access, synonyms, and completed sunset zones\n\n\nWeek 2\n\n\n\n\n\n\n\n\nJan 17, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n\n\n\n\n\n\nSunset Climate Zones and Taxonomy\n\n\nWeek 1\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\nWeek 0\n\n\n\n\n\n\n\n\nJan 3, 2024\n\n\nKyle Nessen\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "workbooks/taxonomy.html#create-condensened-dataframe",

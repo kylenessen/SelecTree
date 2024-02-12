@@ -1,0 +1,78 @@
+---
+title: "Common Names Continued, Embeddings"
+subtitle: "Week 4"
+author: "Kyle Nessen"
+date: "2024-02-07"
+toc: true
+categories: []
+format: 
+   html:
+     df-print: kable
+execute:
+  echo: false
+  warning: false
+---
+
+## Previous week notes
+
+-   Matt was happy to include as many common names as possible.
+-   I said I would go through and do some more clean up before shipping a completed list to Logan.
+-   Matt wanted me to keep in mind the project to create our own name parser for urban trees.
+
+## Clean up notes
+
+Last week I presented `9,988` common names for all SelecTree species. This includes existing and new names from GBIF. However, a quick inspection indicated that a lot of those names are false duplicates. For example **WHITE FIR** and **WHITE-FIR** may look different to the computer, but are actually essentially duplicates of the same name. For the dashed names, I reviewed about 300 names before making the call to do a find a replace on the whole dataset. This dropped the total names by about `~3,000` alone.
+
+There were also some other anomalies from GBIF, including multiple names separated by a comma on the same line. I dealt with these as well.
+
+Some of the existing common names had a mix of upper and lower case. I've fixed that in this iteration so all names are now upper case.
+
+In the end, this brought the total number of names (both existing and new) down to `6,518`. Much better!
+
+## Embeddings
+
+Not content to leave it there, I used AI to help surface additional duplicate names.
+
+I did this by using [word embedding](https://en.wikipedia.org/wiki/Word_embedding) to essentially translate the common name to a numerical vector. This allows me to calculate the similarity to other common names as a single score between 0 (no similarity) and 1 (identical).
+
+It's important to note that this is a semantic similarity, which goes deeper than surface level comparisons. For example, **DUTCH ELM** and **HOLLAND ELM** have a similarity score of `0.89`. While **PUNK TREE** and **MELALEUCA** have a similarity score of `0.21`.
+
+Here's a random sample of 25 common names and their most similar pair.
+
+```{r}
+library(readr)
+library(tidyverse)
+df <- read_csv("common_name_embeddings_20240206.csv")
+df %>%
+  select(c(scientific_name,CommonName,SimilarToCommonName,SimilarityScore)) %>%
+  rename(`Scientific Name` = scientific_name, `Common Name` = CommonName, `Most Similar Name` = SimilarToCommonName, `Similarity Score` = SimilarityScore) %>%
+  sample_n(size = 25)
+
+```
+
+I've made another Google Sheet with the full list of comparison, with the most similar (and most likely to be a duplicate) at the top. I've also added check boxes for names that should be ***removed.*** If there's no check box, I'll assume it's good to keep. If you want me to keep everything, great. Or we can review till we get tired of it. Just let me know how to proceed.
+
+```{=html}
+<div style="text-align: center;">
+    <a href="https://docs.google.com/spreadsheets/d/1RLxf8dbUFPRT7He7yXrWk8dn5Ii2xWuV2bJvK2pTOB0/edit?usp=sharing" target="_blank" style="background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 20px 40px; /* Size of the button */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px; /* Font size */
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;">SelecTree - Similar Common Names</a>
+</div>
+```
+### Other uses for embedding
+
+This may be an over-engineered solution for a list of common names, but I think it was a useful exercise. There are genuine duplicates in that list that would have been otherwise difficult to catch.
+
+Additionally, embeddings can be used to do robust fuzzy matching on names inputted by users. This could be useful for our name parser service, and I don't think any of the other common services (like [TNRS](https://tnrs.biendata.org/)) are using this particular technique. I believe they are using older natural language processing methods.
+
+## Synonyms
+
+Next week I'll repeat the work I did for common names but for taxonomic synonyms. Please let me know if there's another area I should focus.

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Kyle Nessen">
+<meta name="dcterms.date" content="2024-02-07">
 
-<title>SelecTree - SelecTree Data Analysis Documentation</title>
+<title>SelecTree - Common Names Continued, Embeddings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +25,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +68,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +80,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">SelecTree</span>
     </a>
   </div>
@@ -149,7 +91,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -162,203 +104,281 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      <h1 class="title">SelecTree Data Analysis Documentation</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Common Names Continued, Embeddings</h1>
+            <p class="subtitle lead">Week 4</p>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Kyle Nessen </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 7, 2024</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#previous-week-notes" id="toc-previous-week-notes" class="nav-link active" data-scroll-target="#previous-week-notes">Previous week notes</a></li>
+  <li><a href="#clean-up-notes" id="toc-clean-up-notes" class="nav-link" data-scroll-target="#clean-up-notes">Clean up notes</a></li>
+  <li><a href="#embeddings" id="toc-embeddings" class="nav-link" data-scroll-target="#embeddings">Embeddings</a>
+  <ul class="collapse">
+  <li><a href="#other-uses-for-embedding" id="toc-other-uses-for-embedding" class="nav-link" data-scroll-target="#other-uses-for-embedding">Other uses for embedding</a></li>
+  </ul></li>
+  <li><a href="#synonyms" id="toc-synonyms" class="nav-link" data-scroll-target="#synonyms">Synonyms</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<section id="previous-week-notes" class="level2">
+<h2 class="anchored" data-anchor-id="previous-week-notes">Previous week notes</h2>
+<ul>
+<li>Matt was happy to include as many common names as possible.</li>
+<li>I said I would go through and do some more clean up before shipping a completed list to Logan.</li>
+<li>Matt wanted me to keep in mind the project to create our own name parser for urban trees.</li>
+</ul>
+</section>
+<section id="clean-up-notes" class="level2">
+<h2 class="anchored" data-anchor-id="clean-up-notes">Clean up notes</h2>
+<p>Last week I presented <code>9,988</code> common names for all SelecTree species. This includes existing and new names from GBIF. However, a quick inspection indicated that a lot of those names are false duplicates. For example <strong>WHITE FIR</strong> and <strong>WHITE-FIR</strong> may look different to the computer, but are actually essentially duplicates of the same name. For the dashed names, I reviewed about 300 names before making the call to do a find a replace on the whole dataset. This dropped the total names by about <code>~3,000</code> alone.</p>
+<p>There were also some other anomalies from GBIF, including multiple names separated by a comma on the same line. I dealt with these as well.</p>
+<p>Some of the existing common names had a mix of upper and lower case. I’ve fixed that in this iteration so all names are now upper case.</p>
+<p>In the end, this brought the total number of names (both existing and new) down to <code>6,518</code>. Much better!</p>
+</section>
+<section id="embeddings" class="level2">
+<h2 class="anchored" data-anchor-id="embeddings">Embeddings</h2>
+<p>Not content to leave it there, I used AI to help surface additional duplicate names.</p>
+<p>I did this by using <a href="https://en.wikipedia.org/wiki/Word_embedding">word embedding</a> to essentially translate the common name to a numerical vector. This allows me to calculate the similarity to other common names as a single score between 0 (no similarity) and 1 (identical).</p>
+<p>It’s important to note that this is a semantic similarity, which goes deeper than surface level comparisons. For example, <strong>DUTCH ELM</strong> and <strong>HOLLAND ELM</strong> have a similarity score of <code>0.89</code>. While <strong>PUNK TREE</strong> and <strong>MELALEUCA</strong> have a similarity score of <code>0.21</code>.</p>
+<p>Here’s a random sample of 25 common names and their most similar pair.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 28%">
+<col style="width: 26%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Scientific Name</th>
+<th style="text-align: left;">Common Name</th>
+<th style="text-align: left;">Most Similar Name</th>
+<th style="text-align: right;">Similarity Score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Agathis robusta</td>
+<td style="text-align: left;">AUSTRALIAN KAURI</td>
+<td style="text-align: left;">SMOOTHBARK KAURI</td>
+<td style="text-align: right;">0.5556556</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cotoneaster salicifolius</td>
+<td style="text-align: left;">WILLOW LEAVED COTONEASTER</td>
+<td style="text-align: left;">WILLOW LEAF COTONEASTER</td>
+<td style="text-align: right;">0.9353113</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Malus sylvestris</td>
+<td style="text-align: left;">EUROPEAN CRAB APPLE</td>
+<td style="text-align: left;">EUROPEAN WILD APPLE</td>
+<td style="text-align: right;">0.7778924</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Syzygium cumini</td>
+<td style="text-align: left;">PORTUGUESE PLUM</td>
+<td style="text-align: left;">DUBAT</td>
+<td style="text-align: right;">0.2633872</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Corymbia citriodora</td>
+<td style="text-align: left;">LEMON SCENT GUM</td>
+<td style="text-align: left;">LEMON SCENTED GUM</td>
+<td style="text-align: right;">0.9833951</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Amelanchier canadensis</td>
+<td style="text-align: left;">EASTERN SERVICEBERRY</td>
+<td style="text-align: left;">CANADIAN SERVICEBERRY</td>
+<td style="text-align: right;">0.6838179</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Moringa oleifera</td>
+<td style="text-align: left;">DRUMSTICKTREE</td>
+<td style="text-align: left;">HORSERADISHTREE</td>
+<td style="text-align: right;">0.4749083</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cornus florida</td>
+<td style="text-align: left;">FLORIDA DOGWOOD</td>
+<td style="text-align: left;">WHITE CORNEL</td>
+<td style="text-align: right;">0.3870133</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Casuarina equisetifolia</td>
+<td style="text-align: left;">SHE OAK</td>
+<td style="text-align: left;">POLYNESIAN IRONWOOD</td>
+<td style="text-align: right;">0.4099975</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Quercus turbinella</td>
+<td style="text-align: left;">SONORAN SCRUB OAK</td>
+<td style="text-align: left;">DESERT SCRUB OAK</td>
+<td style="text-align: right;">0.7632381</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Aleurites moluccanus</td>
+<td style="text-align: left;">CANDLEBERRY</td>
+<td style="text-align: left;">LUMBANG</td>
+<td style="text-align: right;">0.2996362</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ficus aurea</td>
+<td style="text-align: left;">FLORIDA STRANGLER FIG</td>
+<td style="text-align: left;">GOLDEN FIG</td>
+<td style="text-align: right;">0.4919955</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Agonis flexuosa</td>
+<td style="text-align: left;">WESTERN AUSTRALIAN MYRTLE</td>
+<td style="text-align: left;">WILLOW PEPPERMINT</td>
+<td style="text-align: right;">0.4268756</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Thespesia populnea</td>
+<td style="text-align: left;">QUILULU</td>
+<td style="text-align: left;">AMAE</td>
+<td style="text-align: right;">0.2472749</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cordia sebestena</td>
+<td style="text-align: left;">BROADLEAF</td>
+<td style="text-align: left;">KELAU</td>
+<td style="text-align: right;">0.2150219</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Araucaria cunninghamii</td>
+<td style="text-align: left;">RICHMOND RIVER PINE</td>
+<td style="text-align: left;">HOOP PINE</td>
+<td style="text-align: right;">0.5784520</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Morinda citrifolia</td>
+<td style="text-align: left;">NGEL</td>
+<td style="text-align: left;">NOPURNEN</td>
+<td style="text-align: right;">0.2878066</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Casuarina equisetifolia</td>
+<td style="text-align: left;">WHISTLINGTREE</td>
+<td style="text-align: left;">WEHKU</td>
+<td style="text-align: right;">0.2106916</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Libidibia ferrea</td>
+<td style="text-align: left;">MORADA</td>
+<td style="text-align: left;">LEOPARD TREE</td>
+<td style="text-align: right;">0.2191152</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Phillyrea latifolia</td>
+<td style="text-align: left;">GREEN OLIVE TREE</td>
+<td style="text-align: left;">MOCK PRIVET</td>
+<td style="text-align: right;">0.3954378</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Syzygium malaccense</td>
+<td style="text-align: left;">OTAHEITE APPLE</td>
+<td style="text-align: left;">FAARIYAP</td>
+<td style="text-align: right;">0.3210089</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pandanus tectorius</td>
+<td style="text-align: left;">TAHITIAN SCREWPINE</td>
+<td style="text-align: left;">KAFU</td>
+<td style="text-align: right;">0.2487246</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lagunaria patersonia</td>
+<td style="text-align: left;">WHITEWOOD</td>
+<td style="text-align: left;">PRIMROSE TREE</td>
+<td style="text-align: right;">0.3828147</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Eucalyptus bridgesiana</td>
+<td style="text-align: left;">APPLEBOX</td>
+<td style="text-align: left;">SWAMP APPLE</td>
+<td style="text-align: right;">0.5530319</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Casuarina equisetifolia</td>
+<td style="text-align: left;">BEACH CASUARINA</td>
+<td style="text-align: left;">HORSETAILTREE</td>
+<td style="text-align: right;">0.3071727</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>I’ve made another Google Sheet with the full list of comparison, with the most similar (and most likely to be a duplicate) at the top. I’ve also added check boxes for names that should be <strong><em>removed.</em></strong> If there’s no check box, I’ll assume it’s good to keep. If you want me to keep everything, great. Or we can review till we get tired of it. Just let me know how to proceed.</p>
+<div style="text-align: center;">
+    <a href="https://docs.google.com/spreadsheets/d/1RLxf8dbUFPRT7He7yXrWk8dn5Ii2xWuV2bJvK2pTOB0/edit?usp=sharing" target="_blank" style="background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 20px 40px; /* Size of the button */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px; /* Font size */
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;">SelecTree - Similar Common Names</a>
+</div>
+<section id="other-uses-for-embedding" class="level3">
+<h3 class="anchored" data-anchor-id="other-uses-for-embedding">Other uses for embedding</h3>
+<p>This may be an over-engineered solution for a list of common names, but I think it was a useful exercise. There are genuine duplicates in that list that would have been otherwise difficult to catch.</p>
+<p>Additionally, embeddings can be used to do robust fuzzy matching on names inputted by users. This could be useful for our name parser service, and I don’t think any of the other common services (like <a href="https://tnrs.biendata.org/">TNRS</a>) are using this particular technique. I believe they are using older natural language processing methods.</p>
+</section>
+</section>
+<section id="synonyms" class="level2">
+<h2 class="anchored" data-anchor-id="synonyms">Synonyms</h2>
+<p>Next week I’ll repeat the work I did for common names but for taxonomic synonyms. Please let me know if there’s another area I should focus.</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-title" data-direction="asc">
-          Title
-        </option>
-         <option value="listing-date-sort" data-direction="asc">
-          Date - Oldest
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Date - Newest
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
-        </option>
-     </select>
-  </div>
-</div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="" data-listing-date-sort="1707292800000" data-listing-file-modified-sort="1707280592822" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="649">
-<div class="thumbnail">
-<p><a href="./posts/week-4/index.html" class="no-external"></a></p><a href="./posts/week-4/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-4/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-4/index.html" class="no-external">Common Names Continued, Embeddings</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-4/index.html" class="no-external">Week 4</a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-4/index.html" class="no-external">Last week I presented <code>9,988</code> common names for all SelecTree species. This includes existing and new names from GBIF. However, a quick inspection indicated that a lot of those…<strong></strong><strong></strong><code></code></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-4/index.html" class="no-external">
-<div class="listing-date">
-Feb 7, 2024
-</div>
-<div class="listing-author">
-Kyle Nessen
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="" data-listing-date-sort="1706688000000" data-listing-file-modified-sort="1707280622157" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="519">
-<div class="thumbnail">
-<p><a href="./posts/week-3/index.html" class="no-external"></a></p><a href="./posts/week-3/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-3/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-3/index.html" class="no-external">Common Names From GBIF</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-3/index.html" class="no-external">Week 3</a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-3/index.html" class="no-external">I took the list of names that were exact matches and accepted names from last week and ran them through GBIF to generate a large list of common names. I then filtered out…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-3/index.html" class="no-external">
-<div class="listing-date">
-Jan 31, 2024
-</div>
-<div class="listing-author">
-Kyle Nessen
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="" data-listing-date-sort="1705478400000" data-listing-file-modified-sort="1706222579275" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1336">
-<div class="thumbnail">
-<p><a href="./posts/week-2/index.html" class="no-external"></a></p><a href="./posts/week-2/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-2/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-2/index.html" class="no-external">Database access, synonyms, and completed sunset zones</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-2/index.html" class="no-external">Week 2</a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-2/index.html" class="no-external">Matt, May, and I met ahead of our meeting with Daniel and Logan.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-2/index.html" class="no-external">
-<div class="listing-date">
-Jan 17, 2024
-</div>
-<div class="listing-author">
-Kyle Nessen
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="" data-listing-date-sort="1704960000000" data-listing-file-modified-sort="1705934077415" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1304">
-<div class="thumbnail">
-<p><a href="./posts/week-1/index.html" class="no-external"></a></p><a href="./posts/week-1/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-1/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-1/index.html" class="no-external">Sunset Climate Zones and Taxonomy</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-1/index.html" class="no-external">Week 1</a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-1/index.html" class="no-external">When I offered to scrape the Sunset Climate Zones, I didn’t realize that the information was <em>only</em> in The New Western Garden Book. That obviously complicates my scraping…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-1/index.html" class="no-external">
-<div class="listing-date">
-Jan 11, 2024
-</div>
-<div class="listing-author">
-Kyle Nessen
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="" data-listing-date-sort="1704268800000" data-listing-file-modified-sort="1705383792177" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1554">
-<div class="thumbnail">
-<p><a href="./posts/week-0/index.html" class="no-external"></a></p><a href="./posts/week-0/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-0/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-0/index.html" class="no-external">Getting Started</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-0/index.html" class="no-external">Week 0</a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-0/index.html" class="no-external">Matt and I met today to discuss how I can contribute to improving the SelecTree database. What was asked of me was to explore the dataset as it stands now, find areas where…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-0/index.html" class="no-external">
-<div class="listing-date">
-Jan 3, 2024
-</div>
-<div class="listing-author">
-Kyle Nessen
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -42,7 +42,7 @@ df %>%
   distinct(rank)
 ```
 
-I've commented this out for now, but this code makes the requests to GBIF to pull vernacular names. I've saved the output to a csv so we don't have to run it again. @fisher2018
+I've commented this out for now, but this code makes the requests to GBIF to pull vernacular names. I've saved the output to a csv so we don't have to run it again.
 
 ```{r}
 #library(tidyverse)
@@ -173,4 +173,70 @@ write to csv
 #write_csv(common_names_combined,"common_names_export.csv")
 ```
 
-## References
+I've noticed some names are identical, but have a dash instead of a space. Let's just take a quick look to see if we can do a clean find and replace.
+
+```{r}
+common_names_combined %>%
+  filter(str_detect(common_name, fixed("-")))
+```
+
+I went through several hundred and don't see any need for them. Let's drop them.
+
+```{r}
+common_names_combined
+common_names_combined <- common_names_combined %>%
+  mutate(common_name = str_replace_all(common_name, fixed("-"), " ")) %>%
+  distinct(common_name, .keep_all = TRUE)
+common_names_combined
+
+```
+
+I noticed some commas in there as well. Let's do the same procedure.
+
+```{r}
+common_names_combined %>%
+  filter(str_detect(common_name, fixed(",")))
+```
+
+I don't want to mess with these so I'm just going to drop them. Of the 6,500 new names we are adding, this could only add a handful.
+
+```{r}
+common_names_combined <- common_names_combined %>%
+  filter(!str_detect(common_name, fixed(",")))
+common_names_combined
+```
+
+Let's check for any other weird characters.
+
+```{r}
+pattern <- "[^A-Za-z0-9 '\\-]"
+
+# Finding rows with non-standard characters in 'common_name'
+common_names_combined %>%
+  filter(str_detect(common_name, pattern))
+
+```
+
+The only problematic name I saw was "WILD CHINA TREE / WESTERN SOAPBERRY". I'm going to drop it.
+
+```{r}
+common_names_combined <- common_names_combined %>%
+  filter(common_name != "WILD CHINA TREE / WESTERN SOAPBERRY")
+```
+
+```{r}
+common_names_combined %>%
+  filter(scientific_name == "Abies concolor")
+```
+
+Let's write to csv again
+
+```{r}
+write_csv(common_names_combined,"/Users/kylenessen/Documents/Code/SelecTree/posts/week-4/common_names_20240206.csv")
+```
+
+## Load in embeddings
+
+```{r}
+emb <- read_csv("/Users/kylenessen/Documents/Code/SelecTree/posts/week-4/common_name_embeddings_20240206.csv")
+```

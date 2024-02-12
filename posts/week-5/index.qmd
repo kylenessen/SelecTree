@@ -1,0 +1,38 @@
+---
+title: "TITLE"
+subtitle: "Week 5"
+author: "Kyle Nessen"
+date: "2024-02-14"
+toc: true
+categories: []
+format: 
+   html:
+     df-print: kable
+execute:
+  echo: false
+  warning: false
+---
+
+## Notes
+
+-   Don't do any more cleaning. More names is better
+
+-   Look into how google predicts what you are trying to type
+
+-   Prepare a google sheet for anything 90% on the week 0 post
+
+    -   For Caitlyn and new student
+
+-   Remove generic_2
+
+-   Include flower_color
+
+-   Keep pushing on synonyms
+
+-   Send updated common names to Logan
+
+-   Biodiversity score (IUCN) and rarity
+
+    -   Incorporate into database
+
+    -   Matt was interested in the hexagon extent
